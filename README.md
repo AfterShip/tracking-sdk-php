@@ -223,7 +223,7 @@ var_dump($couriers);
 **POST** /couriers/detect
 
 ```php
-$payload = new \Tracking\API\Courier\TrackingDetectCourierRequest();
+$payload = new \Tracking\API\Courier\DetectCourierRequest();
 $payload->slug = ['<slug>'];
 $payload->tracking_number = '<tracking_number>';
 $couriers = $client->courier->detectCourier($payload);
