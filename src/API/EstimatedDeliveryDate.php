@@ -31,7 +31,7 @@ class EstimatedDeliveryDate extends APIBase
 
             'json' => $body->toRequestArray(),
         ];
-        $resp = $this->httpClient->request('POST', sprintf("/tracking/2024-04/estimated-delivery-date/predict-batch"), $options);
+        $resp = $this->httpClient->request('POST', sprintf("/tracking/2024-07/estimated-delivery-date/predict-batch"), $options);
         $result = $this->parseSingleResource($resp, '', \Tracking\API\EstimatedDeliveryDate\PredictBatchResponse::class);
         return $result;
     }
