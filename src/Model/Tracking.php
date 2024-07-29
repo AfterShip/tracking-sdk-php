@@ -14,6 +14,10 @@ class Tracking extends Base
      */
     public $id;
     /**
+     * @var string The length of the tracking ID has been increased from 24 characters to 32 characters. We will use the legacy_id field to store the original 24-character tracking ID to maintain compatibility with existing data. Therefore, all tracking endpoints will continue to work with the legacy_id field as before.
+     */
+    public $legacy_id;
+    /**
      * @var string The date and time the shipment was imported or added to AfterShip. It uses the format `YYYY-MM-DDTHH:mm:ssZ` for the timezone GMT +0.
      */
     public $created_at;
@@ -134,19 +138,15 @@ class Tracking extends Base
      */
     public $shipment_type;
     /**
-     * @var int|float|null Shipment weight provied by carrier.
+     * @var ShipmentWeightTracking The shipment_weight field represents the total weight of the shipment. In scenarios where the carrier does not provide this information, you can provide the weight to AfterShip. We will prioritize the data provided by the carrier, if available. The shipment weight will be included in the Response and accessed through the GET API, Webhook, and CSV export. It will also be displayed on the AfterShip Tracking admin. Additionally, it plays a significant role in error-free shipment handling and carbon emission calculations, ensuring accurate and informed decision-making
      */
     public $shipment_weight;
-    /**
-     * @var string|null Weight unit provied by carrier.
-     */
-    public $shipment_weight_unit;
     /**
      * @var string|null Signed by information for delivered shipment.
      */
     public $signed_by;
     /**
-     * @var array[] The phone number(s) to receive sms notifications.  Phone number should begin with `+` and `Area Code` before phone number. Comma separated for multiple values.
+     * @var array[] The phone number(s) to receive sms notifications.  Phone number should begin with `+` and `Area Code` before phone number.
      */
     public $smses;
     /**
@@ -190,11 +190,11 @@ class Tracking extends Base
      */
     public $checkpoints;
     /**
-     * @var array[] Phone number(s) subscribed to receive sms notifications. Comma separated for multiple values
+     * @var array[] Phone number(s) subscribed to receive sms notifications.
      */
     public $subscribed_smses;
     /**
-     * @var array[] Email address(es) subscribed to receive email notifications. Comma separated for multiple values
+     * @var array[] Email address(es) subscribed to receive email notifications.
      */
     public $subscribed_emails;
     /**
@@ -202,7 +202,7 @@ class Tracking extends Base
      */
     public $return_to_sender;
     /**
-     * @var string|null The promised delivery date of the order. It uses the format `YYYY-MM-DD`. This has no timezone and uses whatever date you provide.
+     * @var string|null The promised delivery date of the order. It uses the formats:- YYYY-MM-DD- YYYY-MM-DDTHH:mm:ss- YYYY-MM-DDTHH:mm:ssZ
      */
     public $order_promised_delivery_date;
     /**
@@ -321,4 +321,8 @@ class Tracking extends Base
      * @var string|null|string The signature_requirement field serves the purpose of validating the service option type, specifically proof of delivery. By collecting the recipient's signature upon delivery, it ensures the package reaches the intended recipient and prevents disputes related to non-delivery or lost packages.</br>
      */
     public $signature_requirement;
+    /**
+     * @var string|null The delivery location type represents the secure area where the carrier leaves the package, such as a safe place, locker, mailbox, front porch, etc. This information helps ensure the shipment reaches the intended recipient efficiently, minimizing the risk of theft or damage.
+     */
+    public $delivery_location_type;
 }
