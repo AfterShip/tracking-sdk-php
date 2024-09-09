@@ -26,7 +26,7 @@
         "php": ">=8.0.0",
         "guzzlehttp/guzzle": ">=6.5.8",
         "phpseclib/phpseclib": "3.0.37",
-        "symfony/serializer": "^3.4",
+        "symfony/serializer": "^6.3.2|^7.0",
         "symfony/property-access": "^3.4",
         "symfony/property-info": "^5.4|^6.0|^7.0",
         "phpdocumentor/reflection-docblock": ">=5.4",
