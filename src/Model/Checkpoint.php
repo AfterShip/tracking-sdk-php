@@ -14,7 +14,7 @@ class Checkpoint extends Base
      */
     public $created_at;
     /**
-     * @var string The unique code of courier for this checkpoint. Get courier slug
+     * @var string The unique code of courier for this checkpoint. Get courier slug 
      */
     public $slug;
     /**

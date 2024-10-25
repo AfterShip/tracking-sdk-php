@@ -10,7 +10,7 @@ use Tracking\Model\Base\Base;
 class PredictBatchResponse extends Base
 {
     /**
-     * @var \Tracking\Model\EstimatedDeliveryDateResponse[]
+     * @var \Tracking\Model\EstimatedDeliveryDateResponse[] 
      */
     public $estimated_delivery_dates;
 }

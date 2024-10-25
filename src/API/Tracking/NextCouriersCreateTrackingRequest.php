@@ -10,7 +10,7 @@ use Tracking\Model\Base\Base;
 class NextCouriersCreateTrackingRequest extends Base
 {
     /**
-     * @var string
+     * @var string 
      */
     public $slug;
     /**

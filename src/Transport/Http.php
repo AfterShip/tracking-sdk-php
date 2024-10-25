@@ -21,7 +21,7 @@ class Http
     private $config;
     const CONTENT_TYPE = 'application/json';
 
-    const SDK_VERSION = '8.0.0';
+    const SDK_VERSION = '9.0.0';
 
     public function __construct(Config $config)
     {
@@ -167,7 +167,7 @@ class Http
             $headers['content-type'],
             $headers['date'],
             $canonicalizedHeaders,
-            $canonicalizedResource,
+            $canonicalizedResource
         ]), 'UTF-8');
     }
 

@@ -102,9 +102,9 @@ class GetTrackingByIdResponse extends Base
      */
     public $emails;
     /**
-     * @var string|null The estimated delivery date provided by the carrier. It uses the shipment recipient’s timezone and the format may differ depending on how the carrier provides it:- YYYY-MM-DD- YYYY-MM-DDTHH:mm:ss- YYYY-MM-DDTHH:mm:ssZ
+     * @var CourierEstimatedDeliveryDateGetTrackingByIdResponse The field contains the estimated delivery date provided by the carrier.
      */
-    public $expected_delivery;
+    public $courier_estimated_delivery_date;
     /**
      * @var string|null Text field for the note.
      */
@@ -325,4 +325,12 @@ class GetTrackingByIdResponse extends Base
      * @var string|null The delivery location type represents the secure area where the carrier leaves the package, such as a safe place, locker, mailbox, front porch, etc. This information helps ensure the shipment reaches the intended recipient efficiently, minimizing the risk of theft or damage.
      */
     public $delivery_location_type;
+    /**
+     * @var string|null The tracking URL directs your customers to the shipment tracking page which can display either the default or a customized page based on segmentation rules.- The universal URL is used by default, but you can opt for a custom domain if you have one. Learn how to set up a custom domain .The field is not automatically enabled in API & Webhook. Please contact support if you’d like to enable it.
+     */
+    public $aftership_tracking_url;
+    /**
+     * @var string|null The order URL directs your customers to the order tracking page, which includes all shipments. It can display either the default or a customized page based on segmentation rules.- The universal URL is used by default, but you can opt for a custom domain if you have one. Learn how to set up a custom domain .The field is not automatically enabled in API & Webhook. Please contact support if you’d like to enable it.
+     */
+    public $aftership_tracking_order_url;
 }

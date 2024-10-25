@@ -22,7 +22,7 @@ class EstimatedPickupEstimatedDeliveryDateRequest extends Base
      */
     public $business_days;
     /**
-     * @var OrderProcessingTimeEstimatedPickupEstimatedDeliveryDateRequest
+     * @var OrderProcessingTimeEstimatedPickupEstimatedDeliveryDateRequest 
      */
     public $order_processing_time;
 }

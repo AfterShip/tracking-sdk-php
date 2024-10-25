@@ -10,7 +10,7 @@ use Tracking\Model\Base\Base;
 class ReasonEventsCheckpoint extends Base
 {
     /**
-     * @var string The code of the reason.
+     * @var string The code of the reason. 
      */
     public $code;
 }

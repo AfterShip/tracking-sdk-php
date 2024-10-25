@@ -14,7 +14,7 @@ class CourierResponseV1 extends Base
      */
     public $meta;
     /**
-     * @var DataCourierResponseV1
+     * @var DataCourierResponseV1 
      */
     public $data;
 }

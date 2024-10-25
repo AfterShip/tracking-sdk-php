@@ -22,43 +22,64 @@ class Courier extends APIBase
     /**
     * @throws AfterShipError
     */
-    public function getAllCouriers(
-        array $headers = []
-    ): \Tracking\API\Courier\GetAllCouriersResponse {
+    public function getUserCouriers(
+    
+    
+    
+    array $headers = []
+    ): \Tracking\API\Courier\GetUserCouriersResponse
+    {
+
+
         $options = [
             'headers' => $headers,
+        
+        
         ];
-        $resp = $this->httpClient->request('GET', sprintf("/tracking/2024-07/couriers/all"), $options);
-        $result = $this->parseSingleResource($resp, '', \Tracking\API\Courier\GetAllCouriersResponse::class);
-        return $result;
+        $resp = $this->httpClient->request('GET', sprintf("/tracking/2024-10/couriers" ), $options);
+
+        return $this->parseSingleResource($resp, \Tracking\API\Courier\GetUserCouriersResponse::class);
     }
     /**
     * @throws AfterShipError
     */
-    public function getUserCouriers(
-        array $headers = []
-    ): \Tracking\API\Courier\GetUserCouriersResponse {
+    public function getAllCouriers(
+    
+    
+    
+    array $headers = []
+    ): \Tracking\API\Courier\GetAllCouriersResponse
+    {
+
+
         $options = [
             'headers' => $headers,
+        
+        
         ];
-        $resp = $this->httpClient->request('GET', sprintf("/tracking/2024-07/couriers"), $options);
-        $result = $this->parseSingleResource($resp, '', \Tracking\API\Courier\GetUserCouriersResponse::class);
-        return $result;
+        $resp = $this->httpClient->request('GET', sprintf("/tracking/2024-10/couriers/all" ), $options);
+
+        return $this->parseSingleResource($resp, \Tracking\API\Courier\GetAllCouriersResponse::class);
     }
     /**
     * @throws AfterShipError
     */
     public function detectCourier(
-        \Tracking\API\Courier\DetectCourierRequest $body,
-        array $headers = []
-    ): \Tracking\API\Courier\DetectCourierResponse {
+    
+     \Tracking\API\Courier\DetectCourierRequest $body, 
+    
+    array $headers = []
+    ): \Tracking\API\Courier\DetectCourierResponse
+    {
+
+
         $options = [
             'headers' => $headers,
-
-            'json' => $body->toRequestArray(),
+        
+        'json' => $body->toRequestArray(),
         ];
-        $resp = $this->httpClient->request('POST', sprintf("/tracking/2024-07/couriers/detect"), $options);
-        $result = $this->parseSingleResource($resp, '', \Tracking\API\Courier\DetectCourierResponse::class);
-        return $result;
+        $resp = $this->httpClient->request('POST', sprintf("/tracking/2024-10/couriers/detect" ), $options);
+
+        return $this->parseSingleResource($resp, \Tracking\API\Courier\DetectCourierResponse::class);
     }
 }

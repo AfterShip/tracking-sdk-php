@@ -22,11 +22,11 @@ class EstimatedPickupEstimatedDeliveryDateResponse extends Base
      */
     public $business_days;
     /**
-     * @var OrderProcessingTimeEstimatedPickupEstimatedDeliveryDateResponse
+     * @var OrderProcessingTimeEstimatedPickupEstimatedDeliveryDateResponse 
      */
     public $order_processing_time;
     /**
-     * @var string|null The local pickup time of the package.
+     * @var string|null The local pickup time of the package. 
      */
     public $pickup_time;
 }

@@ -14,7 +14,7 @@ class TrackingResponseGetMultipleV1 extends Base
      */
     public $meta;
     /**
-     * @var DataTrackingResponseGetMultipleV1
+     * @var DataTrackingResponseGetMultipleV1 
      */
     public $data;
 }

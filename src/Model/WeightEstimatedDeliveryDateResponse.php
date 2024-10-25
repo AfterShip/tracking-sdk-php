@@ -10,7 +10,7 @@ use Tracking\Model\Base\Base;
 class WeightEstimatedDeliveryDateResponse extends Base
 {
     /**
-     * @var string The weight unit of the package.
+     * @var string The weight unit of the package. 
      */
     public $unit;
     /**

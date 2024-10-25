@@ -5,21 +5,16 @@
  */
 namespace Tracking\API\Tracking;
 
-class GetTrackingsResponse extends \Tracking\Model\Base\Base
+use Tracking\Model\Base\Base;
+
+class GetTrackingsResponse extends Base
 {
     /**
-     * @var \Tracking\Model\Tracking[]
-     */
-    public $trackings;
-
-    /**
-     * @var \Tracking\Model\PaginationPage
+     * @var PaginationGetTrackingsResponse The Pagination holds the information for the pagination when the response contains multiple objects.
      */
     public $pagination;
-
-    public function __construct(array $trackings, \Tracking\Model\PaginationPage $pagination)
-    {
-        $this->trackings = $trackings;
-        $this->pagination = $pagination;
-    }
+    /**
+     * @var \Tracking\Model\Tracking[] Array of 
+     */
+    public $trackings;
 }

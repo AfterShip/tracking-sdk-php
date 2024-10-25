@@ -30,7 +30,7 @@ class CreateTrackingRequest extends Base
      */
     public $order_id_path;
     /**
-     * @var array|null Custom fields that accept an object with string field. In order to protect the privacy of your customers, do not include any
+     * @var array|null Custom fields that accept an object with string field. In order to protect the privacy of your customers, do not include any 
      */
     public $custom_fields;
     /**
@@ -146,7 +146,7 @@ class CreateTrackingRequest extends Base
      */
     public $courier_connection_id;
     /**
-     * @var NextCouriersCreateTrackingRequest[] If a shipment has multiple carriers, you can use the next_couriers field to tell AfterShip who the second carrier is. This is useful if the first carrier does not send us this information.
+     * @var NextCouriersCreateTrackingRequest[] If a shipment has multiple carriers, you can use the next_couriers field to tell AfterShip who the second carrier is. This is useful if the first carrier does not send us this information. 
      */
     public $next_couriers;
     /**

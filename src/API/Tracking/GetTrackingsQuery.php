@@ -7,10 +7,11 @@ namespace Tracking\API\Tracking;
 
 class GetTrackingsQuery extends \Tracking\API\Base\QueryBase
 {
+
     /**
-     * @var int|null The page to query. Maximum page number is bounded by total number of queried trackings which cannot exceed 160,000 trackings. (Default: 1)
+     * @var string|null A string representing the cursor value for the current page of results.
      */
-    public $page;
+    public $cursor;
     /**
      * @var int|null Number of trackings each page contain. (Default: 100, Max: 200)
      */
@@ -80,9 +81,9 @@ class GetTrackingsQuery extends \Tracking\API\Base\QueryBase
      */
     public $order_id;
 
-    public function setPage(string $page): GetTrackingsQuery
+    public function setCursor(string $cursor): GetTrackingsQuery
     {
-        $this->page = $page;
+        $this->cursor = $cursor;
         return $this;
     }
     public function setLimit(string $limit): GetTrackingsQuery

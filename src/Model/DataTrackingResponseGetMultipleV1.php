@@ -10,59 +10,11 @@ use Tracking\Model\Base\Base;
 class DataTrackingResponseGetMultipleV1 extends Base
 {
     /**
-     * @var int Page to show. (Default: 1)
+     * @var PaginationDataTrackingResponseGetMultipleV1 The Pagination holds the information for the pagination when the response contains multiple objects.
      */
-    public $page;
+    public $pagination;
     /**
-     * @var int Number of trackings each page contain. (Default: 100, Max: 200)
-     */
-    public $limit;
-    /**
-     * @var int Number of returned trackings
-     */
-    public $count;
-    /**
-     * @var string Search the content of the tracking record fields: `tracking_number`, `title`, `order_id`, `customer_name`, `custom_fields`, `order_id`, `emails`, `smses`
-     */
-    public $keyword;
-    /**
-     * @var string Unique
-     */
-    public $slug;
-    /**
-     * @var array[] Origin country/region of trackings. Use
-     */
-    public $origin;
-    /**
-     * @var array[] Destination country/region of trackings. Use
-     */
-    public $destination;
-    /**
-     * @var string|null|\Tracking\Model\TagV1 Current status of tracking. (
-     */
-    public $tag;
-    /**
-     * @var string Start date and time of trackings created. AfterShip only stores data of 120 days.
-     */
-    public $created_at_min;
-    /**
-     * @var string End date and time of trackings created.
-     */
-    public $created_at_max;
-    /**
-     * @var string Date and time the tracking was last updated
-     */
-    public $last_updated_at;
-    /**
-     * @var array[] Whether or not the shipment is returned to sender. Value is `true` when any of its checkpoints has subtag `Exception_010` (returning to sender) or `Exception_011` (returned to sender). Otherwise value is `false`
-     */
-    public $return_to_sender;
-    /**
-     * @var array[] Destination country/region of the tracking detected from the courier. ISO Alpha-3 (three letters). Value will be `null` if the courier doesn't provide the destination country.
-     */
-    public $courier_destination_country_iso3;
-    /**
-     * @var \Tracking\Model\Tracking[] Array of
+     * @var \Tracking\Model\Tracking[] Array of 
      */
     public $trackings;
 }

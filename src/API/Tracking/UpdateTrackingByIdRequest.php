@@ -34,7 +34,7 @@ class UpdateTrackingByIdRequest extends Base
      */
     public $order_id_path;
     /**
-     * @var array|null Custom fields that accept an object with string field. In order to protect the privacy of your customers, do not include any
+     * @var array|null Custom fields that accept an object with string field. In order to protect the privacy of your customers, do not include any 
      */
     public $custom_fields;
     /**
@@ -62,7 +62,7 @@ class UpdateTrackingByIdRequest extends Base
      */
     public $pickup_note;
     /**
-     * @var string Unique code of each courier. Provide a single courier.(https://admin.aftership.com/settings/couriers). Get a list of courier slug using
+     * @var string Unique code of each courier. Provide a single courier.(https://admin.aftership.com/settings/couriers). Get a list of courier slug using 
      */
     public $slug;
     /**

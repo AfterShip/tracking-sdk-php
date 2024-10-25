@@ -23,16 +23,21 @@ class EstimatedDeliveryDate extends APIBase
     * @throws AfterShipError
     */
     public function predictBatch(
-        \Tracking\API\EstimatedDeliveryDate\PredictBatchRequest $body,
-        array $headers = []
-    ): \Tracking\API\EstimatedDeliveryDate\PredictBatchResponse {
+    
+     \Tracking\API\EstimatedDeliveryDate\PredictBatchRequest $body, 
+    
+    array $headers = []
+    ): \Tracking\API\EstimatedDeliveryDate\PredictBatchResponse
+    {
+
+
         $options = [
             'headers' => $headers,
-
-            'json' => $body->toRequestArray(),
+        
+        'json' => $body->toRequestArray(),
         ];
-        $resp = $this->httpClient->request('POST', sprintf("/tracking/2024-07/estimated-delivery-date/predict-batch"), $options);
-        $result = $this->parseSingleResource($resp, '', \Tracking\API\EstimatedDeliveryDate\PredictBatchResponse::class);
-        return $result;
+        $resp = $this->httpClient->request('POST', sprintf("/tracking/2024-10/estimated-delivery-date/predict-batch" ), $options);
+
+        return $this->parseSingleResource($resp, \Tracking\API\EstimatedDeliveryDate\PredictBatchResponse::class);
     }
 }

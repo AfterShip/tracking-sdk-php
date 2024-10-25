@@ -125,7 +125,7 @@ class Config
             !in_array($this->getAuthenticationType(), [
                 self::AUTHENTICATION_TYPE_API_KEY,
                 self::AUTHENTICATION_TYPE_AES,
-                self::AUTHENTICATION_TYPE_RSA,
+                self::AUTHENTICATION_TYPE_RSA
             ])
         ) {
             throw ErrorCode::genLocalError(ErrorCode::INVALID_OPTION, 'Invalid option: authenticationType should be one of API_KEY, AES, RSA');
