@@ -13,7 +13,7 @@ class AdditionalFieldsV1
     const TRACKING_POSTAL_CODE = "tracking_postal_code";
     const TRACKING_SHIP_DATE = "tracking_ship_date";
     const TRACKING_KEY = "tracking_key";
-    const TRACKING_ORIGIN_COUNTRY = "tracking_origin_country";
-    const TRACKING_DESTINATION_COUNTRY = "tracking_destination_country";
+    const TRACKING_ORIGIN_COUNTRY_REGION = "tracking_origin_country_region";
+    const TRACKING_DESTINATION_COUNTRY_REGION = "tracking_destination_country_region";
     const TRACKING_STATE = "tracking_state";
 }

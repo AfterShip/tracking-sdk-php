@@ -8,15 +8,15 @@ namespace Tracking\API\Tracking;
 class GetTrackingsQuery extends \Tracking\API\Base\QueryBase
 {
     /**
-     * @var int|null The page to query. Maximum page number is bounded by total number of queried trackings which cannot exceed 160,000 trackings. (Default: 1)
+     * @var string|null A string representing the cursor value for the current page of results.
      */
-    public $page;
+    public $cursor;
     /**
      * @var int|null Number of trackings each page contain. (Default: 100, Max: 200)
      */
     public $limit;
     /**
-     * @var string|null Search the content of the tracking record fields: `tracking_number`, `title`, `order_id`, `customer_name`, `custom_fields`, `emails`, `smses`
+     * @var string|null Search the content of the tracking record fields: `tracking_number`, `title`, `order_id`, `customers[x].name`, `custom_fields`, `customers[x].email`, `customers[x].phone_number`
      */
     public $keyword;
     /**
@@ -44,19 +44,19 @@ class GetTrackingsQuery extends \Tracking\API\Base\QueryBase
      */
     public $tag;
     /**
-     * @var string|null Start date and time of trackings created. AfterShip only stores data of 120 days.(Defaults: 30 days ago, Example: 2013-03-15T16:41:56+08:00)
+     * @var string|null Start date and time of trackings created. AfterShip only stores data of 120 days. Please make sure the value of the parameter is properly escaped in
      */
     public $created_at_min;
     /**
-     * @var string|null End date and time of trackings created.(Defaults: now, Example: 2013-04-15T16:41:56+08:00)
+     * @var string|null End date and time of trackings created. Please make sure the value of the parameter is properly escaped in
      */
     public $created_at_max;
     /**
-     * @var string|null Start date and time of trackings updated. (Example: 2013-04-15T16:41:56+08:00)
+     * @var string|null Start date and time of trackings updated. Please make sure the value of the parameter is properly escaped in
      */
     public $updated_at_min;
     /**
-     * @var string|null End date and time of trackings updated. (Example: 2013-04-15T16:41:56+08:00)
+     * @var string|null End date and time of trackings updated. Please make sure the value of the parameter is properly escaped in
      */
     public $updated_at_max;
     /**
@@ -70,7 +70,7 @@ class GetTrackingsQuery extends \Tracking\API\Base\QueryBase
     /**
      * @var string|null Destination country/region of trackings returned by courier. Use ISO Alpha-3 (three letters). Use comma for multiple values. (Example: USA,HKG)
      */
-    public $courier_destination_country_iso3;
+    public $courier_destination_country_region;
     /**
      * @var string|null Tags you added to your shipments to help categorize and filter them easily. Use a comma to separate multiple values (Example: a,b)
      */
@@ -80,9 +80,9 @@ class GetTrackingsQuery extends \Tracking\API\Base\QueryBase
      */
     public $order_id;
 
-    public function setPage(string $page): GetTrackingsQuery
+    public function setCursor(string $cursor): GetTrackingsQuery
     {
-        $this->page = $page;
+        $this->cursor = $cursor;
         return $this;
     }
     public function setLimit(string $limit): GetTrackingsQuery
@@ -155,9 +155,9 @@ class GetTrackingsQuery extends \Tracking\API\Base\QueryBase
         $this->return_to_sender = $return_to_sender;
         return $this;
     }
-    public function setCourierDestinationCountryIso3(string $courier_destination_country_iso3): GetTrackingsQuery
+    public function setCourierDestinationCountryRegion(string $courier_destination_country_region): GetTrackingsQuery
     {
-        $this->courier_destination_country_iso3 = $courier_destination_country_iso3;
+        $this->courier_destination_country_region = $courier_destination_country_region;
         return $this;
     }
     public function setShipmentTags(string $shipment_tags): GetTrackingsQuery

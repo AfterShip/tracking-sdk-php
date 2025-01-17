@@ -44,11 +44,11 @@ class Checkpoint extends Base
     /**
      * @var string|null Country/Region ISO Alpha-3 (three letters) of the checkpoint
      */
-    public $country_iso3;
+    public $country_region;
     /**
      * @var string|null Country/Region name of the checkpoint, may also contain other location info.
      */
-    public $country_name;
+    public $country_region_name;
     /**
      * @var string Checkpoint message
      */
@@ -73,4 +73,8 @@ class Checkpoint extends Base
      * @var EventsCheckpoint[] The array provides details about specific event(s) that occurred  to a shipment, such as "returned_to_sender". You can find the full list of events and reasons </span>- The events' value for the same checkpoint message is subject to change as we consistently strive to enhance the performance of this feature.
      */
     public $events;
+    /**
+     * @var string|null|string The source of the checkpoint, which can either be from the carrier or when the user marks the tracking as completed.
+     */
+    public $source;
 }
