@@ -93,10 +93,10 @@ class ErrorCode
         self::INTERNAL_ERROR => "Something went wrong on AfterShip's end.",
     ];
 
-    public static function genRemoteError($statusCode, $metaCode, $responseBody = null, $message = null): AfterShipError
+    public static function genRemoteError($statusCode, $metaCode, $responseBody = null, $message = null, $responseHeader = null): AfterShipError
     {
         $errorCode = self::locateErrorCode($metaCode);
-        return self::genError($errorCode, $statusCode, $metaCode, $responseBody, $message);
+        return self::genError($errorCode, $statusCode, $metaCode, $responseBody, $message, $responseHeader);
     }
 
     public static function genLocalError($errorCode, $message = null): AfterShipError
@@ -104,12 +104,12 @@ class ErrorCode
         return self::genError($errorCode, null, null, null, $message);
     }
 
-    public static function genError($errorCode, $statusCode, $metaCode, $responseBody = null, $message = null): AfterShipError
+    public static function genError($errorCode, $statusCode, $metaCode, $responseBody = null, $message = null, $responseHeader = null): AfterShipError
     {
         if (empty($message)) {
             $message = self::$errorMessageMap[$errorCode] ?? "Unknown error";
         }
-        return new AfterShipError($message, $errorCode, $statusCode, $metaCode, $responseBody);
+        return new AfterShipError($message, $errorCode, $statusCode, $metaCode, $responseBody, $responseHeader);
     }
 
     private static function locateErrorCode($metaCode): string

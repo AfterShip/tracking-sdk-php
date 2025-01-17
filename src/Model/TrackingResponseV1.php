@@ -14,7 +14,7 @@ class TrackingResponseV1 extends Base
      */
     public $meta;
     /**
-     * @var DataTrackingResponseV1
+     * @var \Tracking\Model\Tracking Object describes the tracking information.<div style="display:none; height: 0"></div>
      */
     public $data;
 }

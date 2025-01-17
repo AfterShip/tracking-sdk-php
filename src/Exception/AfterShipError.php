@@ -12,8 +12,9 @@ class AfterShipError extends \Exception
     protected $statusCode;
     protected $message;
     protected $responseBody;
+    protected $responseHeader;
 
-    public function __construct($message, $errorCode, $statusCode, $metaCode = null, $responseBody = null)
+    public function __construct($message, $errorCode, $statusCode, $metaCode = null, $responseBody = null, $responseHeader = null)
     {
         parent::__construct($message, $statusCode);
         $this->metaCode = $metaCode;
@@ -21,6 +22,7 @@ class AfterShipError extends \Exception
         $this->errorCode = $errorCode;
         $this->statusCode = $statusCode;
         $this->responseBody = $responseBody;
+        $this->responseHeader = $responseHeader;
     }
 
     public function getErrorCode()
@@ -41,5 +43,10 @@ class AfterShipError extends \Exception
     public function getResponseBody()
     {
         return $this->responseBody;
+    }
+
+    public function getResponseHeader()
+    {
+        return $this->responseHeader;
     }
 }

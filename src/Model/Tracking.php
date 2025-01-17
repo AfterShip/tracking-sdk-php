@@ -14,6 +14,10 @@ class Tracking extends Base
      */
     public $id;
     /**
+     * @var string The length of the tracking ID has been increased from 24 characters to 32 characters. We will use the legacy_id field to store the original 24-character tracking ID to maintain compatibility with existing data. Therefore, all tracking endpoints will continue to work with the legacy_id field as before.
+     */
+    public $legacy_id;
+    /**
      * @var string The date and time the shipment was imported or added to AfterShip. It uses the format `YYYY-MM-DDTHH:mm:ssZ` for the timezone GMT +0.
      */
     public $created_at;
@@ -21,10 +25,6 @@ class Tracking extends Base
      * @var string The date and time the shipment was updated. It uses the format `YYYY-MM-DDTHH:mm:ssZ` for the timezone GMT +0.
      */
     public $updated_at;
-    /**
-     * @var string (Legacy) The date and time the shipment was updated. It uses the format `YYYY-MM-DDTHH:mm:ssZ` for the timezone GMT +0.
-     */
-    public $last_updated_at;
     /**
      * @var string Tracking number.
      */
@@ -42,17 +42,13 @@ class Tracking extends Base
      */
     public $custom_fields;
     /**
-     * @var string|null Customer name of the tracking.
-     */
-    public $customer_name;
-    /**
      * @var int|null Total transit time in days.- For delivered shipments: Transit time (in days) = Delivered date - Pick-up date- For undelivered shipments: Transit time (in days) = Current date - Pick-up dateValue as `null` for the shipment without pick-up date.
      */
     public $transit_time;
     /**
      * @var string|null The  for the origin country/region. E.g. USA for the United States.
      */
-    public $origin_country_iso3;
+    public $origin_country_region;
     /**
      * @var string|null The state of the sender’s address.
      */
@@ -72,7 +68,7 @@ class Tracking extends Base
     /**
      * @var string|null The  for the destination country/region. E.g. USA for the United States.
      */
-    public $destination_country_iso3;
+    public $destination_country_region;
     /**
      * @var string|null The state of the recipient’s address.
      */
@@ -92,15 +88,11 @@ class Tracking extends Base
     /**
      * @var string|null Destination country/region of the tracking detected from the courier. ISO Alpha-3 (three letters). Value will be `null` if the courier doesn't provide the destination country.
      */
-    public $courier_destination_country_iso3;
+    public $courier_destination_country_region;
     /**
-     * @var array[] Email address(es) to receive email notifications.
+     * @var CourierEstimatedDeliveryDateTracking The field contains the estimated delivery date provided by the carrier.
      */
-    public $emails;
-    /**
-     * @var string|null The estimated delivery date provided by the carrier. It uses the shipment recipient’s timezone and the format may differ depending on how the carrier provides it:- YYYY-MM-DD- YYYY-MM-DDTHH:mm:ss- YYYY-MM-DDTHH:mm:ssZ
-     */
-    public $expected_delivery;
+    public $courier_estimated_delivery_date;
     /**
      * @var string|null Text field for the note.
      */
@@ -134,21 +126,13 @@ class Tracking extends Base
      */
     public $shipment_type;
     /**
-     * @var int|float|null Shipment weight provied by carrier.
+     * @var ShipmentWeightTracking The shipment_weight field represents the total weight of the shipment. In scenarios where the carrier does not provide this information, you can provide the weight to AfterShip. We will prioritize the data provided by the carrier, if available. The shipment weight will be included in the Response and accessed through the GET API, Webhook, and CSV export. It will also be displayed on the AfterShip Tracking admin. Additionally, it plays a significant role in error-free shipment handling and carbon emission calculations, ensuring accurate and informed decision-making
      */
     public $shipment_weight;
-    /**
-     * @var string|null Weight unit provied by carrier.
-     */
-    public $shipment_weight_unit;
     /**
      * @var string|null Signed by information for delivered shipment.
      */
     public $signed_by;
-    /**
-     * @var array[] The phone number(s) to receive sms notifications.  Phone number should begin with `+` and `Area Code` before phone number. Comma separated for multiple values.
-     */
-    public $smses;
     /**
      * @var string Source of how this tracking is added.
      */
@@ -190,11 +174,11 @@ class Tracking extends Base
      */
     public $checkpoints;
     /**
-     * @var array[] Phone number(s) subscribed to receive sms notifications. Comma separated for multiple values
+     * @var array[] Phone number(s) subscribed to receive sms notifications.
      */
     public $subscribed_smses;
     /**
-     * @var array[] Email address(es) subscribed to receive email notifications. Comma separated for multiple values
+     * @var array[] Email address(es) subscribed to receive email notifications.
      */
     public $subscribed_emails;
     /**
@@ -202,7 +186,7 @@ class Tracking extends Base
      */
     public $return_to_sender;
     /**
-     * @var string|null The promised delivery date of the order. It uses the format `YYYY-MM-DD`. This has no timezone and uses whatever date you provide.
+     * @var string|null The promised delivery date of the order. It uses the formats:- YYYY-MM-DD- YYYY-MM-DDTHH:mm:ss- YYYY-MM-DDTHH:mm:ssZ
      */
     public $order_promised_delivery_date;
     /**
@@ -238,7 +222,7 @@ class Tracking extends Base
      */
     public $tracking_key;
     /**
-     * @var string|null Additional field required by some carriers to retrieve the tracking info. The date the shipment was sent, using the format YYYYMMDD. Refer to our article on  for more details.
+     * @var string|null The date and time when the shipment is shipped by the merchant and ready for pickup by the carrier. The field supports the following formats:- YYYY-MM-DD- YYYY-MM-DDTHH:mm:ss- YYYY-MM-DDTHH:mm:ssZThe field serves two key purposes:- Calculate processing time metrics in the Order-to-delivery Analytics dashboard. To ensure accurate analytics, it's recommended to include timezone information when configuring this value- Required by certain carriers to retrieve tracking information as an additional tracking field.
      */
     public $tracking_ship_date;
     /**
@@ -282,17 +266,13 @@ class Tracking extends Base
      */
     public $courier_connection_id;
     /**
-     * @var NextCouriersTracking[] The next couriers get the second carrier information from user or AfterShip.
+     * @var string|null (Legacy) Replaced by `origin_country_region`. Additional field required by some carriers to retrieve the tracking info. The origin country/region of the shipment. Refer to our article on  for more details.
      */
-    public $next_couriers;
+    public $tracking_origin_country_region;
     /**
-     * @var string|null (Legacy) Replaced by `origin_country_iso3`. Additional field required by some carriers to retrieve the tracking info. The origin country/region of the shipment. Refer to our article on  for more details.
+     * @var string|null (Legacy) Replaced by `destination_country_region`. Additional field required by some carriers to retrieve the tracking info. The destination country/region of the shipment. Refer to our article on  for more details.
      */
-    public $tracking_origin_country;
-    /**
-     * @var string|null (Legacy) Replaced by `destination_country_iso3`. Additional field required by some carriers to retrieve the tracking info. The destination country/region of the shipment. Refer to our article on  for more details.
-     */
-    public $tracking_destination_country;
+    public $tracking_destination_country_region;
     /**
      * @var string|null (Legacy) Replaced by `destination_postal_code`. Additional field required by some carriers to retrieve the tracking info. The postal code of the recipient’s address. Refer to our article on  for more details.
      */
@@ -321,4 +301,28 @@ class Tracking extends Base
      * @var string|null|string The signature_requirement field serves the purpose of validating the service option type, specifically proof of delivery. By collecting the recipient's signature upon delivery, it ensures the package reaches the intended recipient and prevents disputes related to non-delivery or lost packages.</br>
      */
     public $signature_requirement;
+    /**
+     * @var string|null The delivery location type represents the secure area where the carrier leaves the package, such as a safe place, locker, mailbox, front porch, etc. This information helps ensure the shipment reaches the intended recipient efficiently, minimizing the risk of theft or damage.
+     */
+    public $delivery_location_type;
+    /**
+     * @var string|null The tracking URL directs your customers to the shipment tracking page which can display either the default or a customized page based on segmentation rules.- The universal URL is used by default, but you can opt for a custom domain if you have one. Learn how to set up a custom domain .The field is not automatically enabled in API & Webhook. Please contact support if you’d like to enable it.
+     */
+    public $aftership_tracking_url;
+    /**
+     * @var string|null The order URL directs your customers to the order tracking page, which includes all shipments. It can display either the default or a customized page based on segmentation rules.- The universal URL is used by default, but you can opt for a custom domain if you have one. Learn how to set up a custom domain .The field is not automatically enabled in API & Webhook. Please contact support if you’d like to enable it.
+     */
+    public $aftership_tracking_order_url;
+    /**
+     * @var FirstMileTracking The field contains information about the first leg of the shipping starting from the carrier picking up the shipment from the shipper to the point where they hand it over to the last-mile carrier. Once AfterShip detects the shipment is multi-leg, we will populate the first-mile information under this object.
+     */
+    public $first_mile;
+    /**
+     * @var LastMileTracking This field contains information about the last leg of the shipment, starting from the carrier who hands it over to the last-mile carrier, all the way to delivery. Once AfterShip detects that the shipment involves multiple legs and identifies the last-mile carrier, we will populate the last-mile carrier information in this object. Alternatively, the user can provide this information in this field to specify the last-mile carrier, which is helpful if AfterShip is unable to detect it automatically.
+     */
+    public $last_mile;
+    /**
+     * @var CustomersTracking[] The field contains the customer information associated with the tracking. A maximum of three customer objects are allowed.
+     */
+    public $customers;
 }

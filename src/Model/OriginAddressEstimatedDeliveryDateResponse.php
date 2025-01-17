@@ -12,7 +12,7 @@ class OriginAddressEstimatedDeliveryDateResponse extends Base
     /**
      * @var string The country/region of the origin location from where the package is picked up by the carrier to be delivered to the final destination. Use 3 letters of ISO 3166-1 country/region code.
      */
-    public $country;
+    public $country_region;
     /**
      * @var string|null State, province, or the equivalent location of the origin address. Use 3 letters of ISO 3166-1 country/region code for countries/regions without state. Either `origin_address.state` or `origin_address.postal_code` is required.
      */

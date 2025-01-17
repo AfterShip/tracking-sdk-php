@@ -30,7 +30,7 @@ class Courier extends Base
      */
     public $web_url;
     /**
-     * @var array[] The extra fields need for tracking, such as `tracking_account_number`, `tracking_postal_code`, `tracking_ship_date`, `tracking_key`, `tracking_destination_country`
+     * @var array[] The extra fields need for tracking, such as `tracking_account_number`, `tracking_postal_code`, `tracking_ship_date`, `tracking_key`, `tracking_destination_country_region`
      */
     public $required_fields;
     /**
@@ -48,5 +48,5 @@ class Courier extends Base
     /**
      * @var array[] Country/Region code (ISO Alpha-3) where the courier provides service
      */
-    public $service_from_country_iso3;
+    public $service_from_country_regions;
 }
