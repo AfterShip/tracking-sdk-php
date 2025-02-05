@@ -18,7 +18,7 @@ class LastMileRetrackTrackingByIdResponse extends Base
      */
     public $slug;
     /**
-     * @var string The transit time for the last-mile of a shipment in days. This field is calculated based on whether the handed_over_to_last_mile_carrier or the received_by_last_mile_carrier event is detected by AfterShip. The handover event date is used to calculate the last-mile transit time.- Last mile transit time (in days)= Delivered date - Handover date
+     * @var string|null The transit time for the last-mile of a shipment in days. This field is calculated based on whether the handed_over_to_last_mile_carrier or the received_by_last_mile_carrier event is detected by AfterShip. The handover event date is used to calculate the last-mile transit time.- Last mile transit time (in days)= Delivered date - Handover date
      */
     public $transit_time;
     /**
