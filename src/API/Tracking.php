@@ -9,8 +9,8 @@ use Tracking\API\Base\APIBase;
 use Tracking\Exception\AfterShipError;
 use Tracking\Exception\ErrorCode;
 use Tracking\Transport\Http;
-use Tracking\API\Tracking\GetTrackingByIdQuery;
 use Tracking\API\Tracking\GetTrackingsQuery;
+use Tracking\API\Tracking\GetTrackingByIdQuery;
 
 class Tracking extends APIBase
 {
@@ -21,6 +21,21 @@ class Tracking extends APIBase
         $this->httpClient = $httpClient;
     }
 
+    /**
+    * @throws AfterShipError
+    */
+    public function getTrackings(
+        GetTrackingsQuery $query = null,
+        array $headers = []
+    ): \Tracking\API\Tracking\GetTrackingsResponse {
+        $options = [
+            'headers' => $headers,
+            'query' => $query ? $query->toArray() : [],
+        ];
+        $resp = $this->httpClient->request('GET', sprintf("/tracking/2025-01/trackings"), $options);
+
+        return $this->parseSingleResource($resp, \Tracking\API\Tracking\GetTrackingsResponse::class);
+    }
     /**
     * @throws AfterShipError
     */
@@ -134,20 +149,5 @@ class Tracking extends APIBase
         $resp = $this->httpClient->request('POST', sprintf("/tracking/2025-01/trackings/%s/mark-as-completed", $id), $options);
 
         return $this->parseSingleResource($resp, \Tracking\API\Tracking\MarkTrackingCompletedByIdResponse::class);
-    }
-    /**
-    * @throws AfterShipError
-    */
-    public function getTrackings(
-        GetTrackingsQuery $query = null,
-        array $headers = []
-    ): \Tracking\API\Tracking\GetTrackingsResponse {
-        $options = [
-            'headers' => $headers,
-            'query' => $query ? $query->toArray() : [],
-        ];
-        $resp = $this->httpClient->request('GET', sprintf("/tracking/2025-01/trackings"), $options);
-
-        return $this->parseSingleResource($resp, \Tracking\API\Tracking\GetTrackingsResponse::class);
     }
 }

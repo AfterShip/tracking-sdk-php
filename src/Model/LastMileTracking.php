@@ -18,15 +18,15 @@ class LastMileTracking extends Base
      */
     public $slug;
     /**
-     * @var string|null The transit time for the last-mile of a shipment in days. This field is calculated based on whether the handed_over_to_last_mile_carrier or the received_by_last_mile_carrier event is detected by AfterShip. The handover event date is used to calculate the last-mile transit time.- Last mile transit time (in days)= Delivered date - Handover date
+     * @var int|null The transit time for the last-mile of a shipment in days. This field is calculated based on whether the handed_over_to_last_mile_carrier or the received_by_last_mile_carrier event is detected by AfterShip. The handover event date is used to calculate the last-mile transit time.- Last mile transit time (in days)= Delivered date - Handover date
      */
     public $transit_time;
     /**
-     * @var string The field contains the official tracking URL of the last-mile carrier, if available. The language parameter of this link is determined by the destination country/region and the language associated with the shipment. If the destination country/region and language data is unavailable, AfterShip will default the language parameter to "US".
+     * @var string|null The field contains the official tracking URL of the last-mile carrier, if available. The language parameter of this link is determined by the destination country/region and the language associated with the shipment. If the destination country/region and language data is unavailable, AfterShip will default the language parameter to "US".
      */
     public $courier_tracking_link;
     /**
-     * @var string The field provides the link for modifying delivery instructions (such as delivery date and shipping address), if supported by the last-mile carrier. The language parameter of this link is determined by the destination country/region and the language associated with the shipment. If the destination country/region and language data is unavailable, AfterShip will default the language parameter to "US".
+     * @var string|null The field provides the link for modifying delivery instructions (such as delivery date and shipping address), if supported by the last-mile carrier. The language parameter of this link is determined by the destination country/region and the language associated with the shipment. If the destination country/region and language data is unavailable, AfterShip will default the language parameter to "US".
      */
     public $courier_redirect_link;
     /**
