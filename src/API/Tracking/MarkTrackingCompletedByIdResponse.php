@@ -34,7 +34,7 @@ class MarkTrackingCompletedByIdResponse extends Base
      */
     public $slug;
     /**
-     * @var bool Whether or not AfterShip will continue tracking the shipments. Value is `false` when tag (status) is `Delivered`, `Expired`, or further updates for 30 days since last update.
+     * @var bool Whether or not AfterShip will continue tracking the shipment. Value is false when no further updates for a few days since last update.
      */
     public $active;
     /**

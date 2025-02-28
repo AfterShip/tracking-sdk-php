@@ -169,8 +169,7 @@ var_dump($trackingInfo);
 
 ```php
 $query = new \Tracking\API\Tracking\GetTrackingsQuery();
-$query->setPage(1)
-    ->setLimit(10)
+$query->setLimit(10)
     ->setKeyword('123');
 $trackingInfo = $client->tracking->getTrackings($query);
 var_dump($trackingInfo);
