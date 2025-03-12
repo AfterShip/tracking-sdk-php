@@ -35,6 +35,19 @@ class Courier extends APIBase
     /**
     * @throws AfterShipError
     */
+    public function getAllCouriers(
+        array $headers = []
+    ): \Tracking\API\Courier\GetAllCouriersResponse {
+        $options = [
+            'headers' => $headers,
+        ];
+        $resp = $this->httpClient->request('GET', sprintf("/tracking/2025-01/couriers/all"), $options);
+
+        return $this->parseSingleResource($resp, \Tracking\API\Courier\GetAllCouriersResponse::class);
+    }
+    /**
+    * @throws AfterShipError
+    */
     public function detectCourier(
         \Tracking\API\Courier\DetectCourierRequest $body,
         array $headers = []
@@ -47,18 +60,5 @@ class Courier extends APIBase
         $resp = $this->httpClient->request('POST', sprintf("/tracking/2025-01/couriers/detect"), $options);
 
         return $this->parseSingleResource($resp, \Tracking\API\Courier\DetectCourierResponse::class);
-    }
-    /**
-    * @throws AfterShipError
-    */
-    public function getAllCouriers(
-        array $headers = []
-    ): \Tracking\API\Courier\GetAllCouriersResponse {
-        $options = [
-            'headers' => $headers,
-        ];
-        $resp = $this->httpClient->request('GET', sprintf("/tracking/2025-01/couriers/all"), $options);
-
-        return $this->parseSingleResource($resp, \Tracking\API\Courier\GetAllCouriersResponse::class);
     }
 }
