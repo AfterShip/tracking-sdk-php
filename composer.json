@@ -24,7 +24,7 @@
     ],
     "require": {
         "php": ">=8.0.0",
-        "guzzlehttp/guzzle": "6.5.8",
+        "guzzlehttp/guzzle": "7.*",
         "phpseclib/phpseclib": "3.0.37",
         "symfony/serializer": "^5.4 || ^6.4 || ^7.0",
         "symfony/property-access": "^5.4 || ^6.4 || ^7.0",
