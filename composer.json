@@ -26,9 +26,9 @@
         "php": ">=8.0.0",
         "guzzlehttp/guzzle": "7.*",
         "phpseclib/phpseclib": "3.0.37",
-        "symfony/serializer": "^3.4",
-        "symfony/property-access": "^3.4",
-        "symfony/property-info": "^3.4",
+        "symfony/serializer": "^5.4 || ^6.4 || ^7.0",
+        "symfony/property-access": "^5.4 || ^6.4 || ^7.0",
+        "symfony/property-info": "^5.4 || ^6.4 || ^7.0",
         "phpdocumentor/reflection-docblock": ">=5.4",
         "ext-json": "*",
         "ext-mbstring": "*"

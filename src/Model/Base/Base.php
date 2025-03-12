@@ -12,6 +12,7 @@ use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ArrayDenormalizer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\PropertyAccess\PropertyAccess;
 
 class Base
 {
@@ -26,7 +27,17 @@ class Base
         $oldErrorReporting = error_reporting();
         error_reporting($oldErrorReporting & ~E_DEPRECATED);
 
-        $serializer = new \Symfony\Component\Serializer\Serializer([new CustomNormalizer()], [new \Symfony\Component\Serializer\Encoder\JsonEncoder()]);
+        $normalizers = [new CustomNormalizer()];
+        $encoders = [new JsonEncoder()];
+        $serializer = new Serializer($normalizers, $encoders);
+
+        // Set the serializer instance for the normalizer
+        foreach ($normalizers as $normalizer) {
+            if (method_exists($normalizer, 'setSerializer')) {
+                $normalizer->setSerializer($serializer);
+            }
+        }
+
         $ret = $serializer->normalize($this);
         error_reporting($oldErrorReporting);
         return $ret;

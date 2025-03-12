@@ -5,16 +5,46 @@
  */
 namespace Tracking\Model\Base;
 
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\SerializerAwareInterface;
+use Symfony\Component\Serializer\SerializerInterface;
 
-class CustomNormalizer extends ObjectNormalizer
+class CustomNormalizer implements NormalizerInterface, SerializerAwareInterface
 {
-    public function normalize($object, $format = null, array $context = [])
-    {
-        $object = parent::normalize($object, $format, $context);
+    private ObjectNormalizer $normalizer;
+    private ?SerializerInterface $serializer = null;
 
-        return array_filter($object, function ($value) {
+    public function __construct()
+    {
+        $this->normalizer = new ObjectNormalizer();
+    }
+
+    public function normalize(mixed $object, string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
+    {
+        if ($this->serializer) {
+            $this->normalizer->setSerializer($this->serializer);
+        }
+
+        $data = $this->normalizer->normalize($object, $format, $context);
+
+        return array_filter($data, function ($value) {
             return $value !== null;
         });
+    }
+
+    public function supportsNormalization(mixed $data, string $format = null, array $context = []): bool
+    {
+        return $this->normalizer->supportsNormalization($data, $format, $context);
+    }
+
+    public function getSupportedTypes(?string $format): array
+    {
+        return $this->normalizer->getSupportedTypes($format);
+    }
+
+    public function setSerializer(SerializerInterface $serializer): void
+    {
+        $this->serializer = $serializer;
     }
 }

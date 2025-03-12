@@ -10,7 +10,7 @@ use Tracking\Model\Base\Base;
 class CreateTrackingRequest extends Base
 {
     /**
-     * @var string Tracking number of a shipment.Duplicated tracking numbers, tracking numbers with invalid tracking number format will not be accepted.We only accept tracking numbers with length from 4 to 100We currently support the following characters in a tracking number:- A - Z- 0 - 9- `-` (Hyphen)- . (Period)- _ (Underscore)
+     * @var string Tracking number of a shipment.Duplicated tracking numbers, tracking numbers with invalid tracking number format will not be accepted.We only accept tracking numbers with length from 4 to 100We currently support the following characters in a tracking number:- A - Z- 0 - 9- `-` (Hyphen)- . (Period)- _ (Underscore)- / (Slash)
      */
     public $tracking_number;
     /**

@@ -24,6 +24,43 @@ class Tracking extends APIBase
     /**
     * @throws AfterShipError
     */
+    public function createTracking(
+        \Tracking\API\Tracking\CreateTrackingRequest $body,
+        array $headers = []
+    ): \Tracking\API\Tracking\CreateTrackingResponse {
+        $options = [
+            'headers' => $headers,
+
+            'json' => $body->toRequestArray(),
+        ];
+        $resp = $this->httpClient->request('POST', sprintf("/tracking/2025-01/trackings"), $options);
+
+        return $this->parseSingleResource($resp, \Tracking\API\Tracking\CreateTrackingResponse::class);
+    }
+    /**
+    * @throws AfterShipError
+    */
+    public function updateTrackingById(
+        string $id,
+        \Tracking\API\Tracking\UpdateTrackingByIdRequest $body,
+        array $headers = []
+    ): \Tracking\API\Tracking\UpdateTrackingByIdResponse {
+        if ($id === "") {
+            throw ErrorCode::genLocalError(ErrorCode::INVALID_REQUEST, "Param 'id' cannot be an empty string");
+        }
+
+        $options = [
+            'headers' => $headers,
+
+            'json' => $body->toRequestArray(),
+        ];
+        $resp = $this->httpClient->request('PUT', sprintf("/tracking/2025-01/trackings/%s", $id), $options);
+
+        return $this->parseSingleResource($resp, \Tracking\API\Tracking\UpdateTrackingByIdResponse::class);
+    }
+    /**
+    * @throws AfterShipError
+    */
     public function getTrackings(
         GetTrackingsQuery $query = null,
         array $headers = []
@@ -59,27 +96,6 @@ class Tracking extends APIBase
     /**
     * @throws AfterShipError
     */
-    public function updateTrackingById(
-        string $id,
-        \Tracking\API\Tracking\UpdateTrackingByIdRequest $body,
-        array $headers = []
-    ): \Tracking\API\Tracking\UpdateTrackingByIdResponse {
-        if ($id === "") {
-            throw ErrorCode::genLocalError(ErrorCode::INVALID_REQUEST, "Param 'id' cannot be an empty string");
-        }
-
-        $options = [
-            'headers' => $headers,
-
-            'json' => $body->toRequestArray(),
-        ];
-        $resp = $this->httpClient->request('PUT', sprintf("/tracking/2025-01/trackings/%s", $id), $options);
-
-        return $this->parseSingleResource($resp, \Tracking\API\Tracking\UpdateTrackingByIdResponse::class);
-    }
-    /**
-    * @throws AfterShipError
-    */
     public function deleteTrackingById(
         string $id,
         array $headers = []
@@ -94,22 +110,6 @@ class Tracking extends APIBase
         $resp = $this->httpClient->request('DELETE', sprintf("/tracking/2025-01/trackings/%s", $id), $options);
 
         return $this->parseSingleResource($resp, \Tracking\API\Tracking\DeleteTrackingByIdResponse::class);
-    }
-    /**
-    * @throws AfterShipError
-    */
-    public function createTracking(
-        \Tracking\API\Tracking\CreateTrackingRequest $body,
-        array $headers = []
-    ): \Tracking\API\Tracking\CreateTrackingResponse {
-        $options = [
-            'headers' => $headers,
-
-            'json' => $body->toRequestArray(),
-        ];
-        $resp = $this->httpClient->request('POST', sprintf("/tracking/2025-01/trackings"), $options);
-
-        return $this->parseSingleResource($resp, \Tracking\API\Tracking\CreateTrackingResponse::class);
     }
     /**
     * @throws AfterShipError
