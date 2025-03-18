@@ -22,19 +22,6 @@ class Courier extends APIBase
     /**
     * @throws AfterShipError
     */
-    public function getUserCouriers(
-        array $headers = []
-    ): \Tracking\API\Courier\GetUserCouriersResponse {
-        $options = [
-            'headers' => $headers,
-        ];
-        $resp = $this->httpClient->request('GET', sprintf("/tracking/2025-01/couriers"), $options);
-
-        return $this->parseSingleResource($resp, \Tracking\API\Courier\GetUserCouriersResponse::class);
-    }
-    /**
-    * @throws AfterShipError
-    */
     public function getAllCouriers(
         array $headers = []
     ): \Tracking\API\Courier\GetAllCouriersResponse {
@@ -44,6 +31,19 @@ class Courier extends APIBase
         $resp = $this->httpClient->request('GET', sprintf("/tracking/2025-01/couriers/all"), $options);
 
         return $this->parseSingleResource($resp, \Tracking\API\Courier\GetAllCouriersResponse::class);
+    }
+    /**
+    * @throws AfterShipError
+    */
+    public function getUserCouriers(
+        array $headers = []
+    ): \Tracking\API\Courier\GetUserCouriersResponse {
+        $options = [
+            'headers' => $headers,
+        ];
+        $resp = $this->httpClient->request('GET', sprintf("/tracking/2025-01/couriers"), $options);
+
+        return $this->parseSingleResource($resp, \Tracking\API\Courier\GetUserCouriersResponse::class);
     }
     /**
     * @throws AfterShipError

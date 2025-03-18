@@ -9,8 +9,8 @@ use Tracking\API\Base\APIBase;
 use Tracking\Exception\AfterShipError;
 use Tracking\Exception\ErrorCode;
 use Tracking\Transport\Http;
-use Tracking\API\Tracking\GetTrackingsQuery;
 use Tracking\API\Tracking\GetTrackingByIdQuery;
+use Tracking\API\Tracking\GetTrackingsQuery;
 
 class Tracking extends APIBase
 {
@@ -21,22 +21,6 @@ class Tracking extends APIBase
         $this->httpClient = $httpClient;
     }
 
-    /**
-    * @throws AfterShipError
-    */
-    public function createTracking(
-        \Tracking\API\Tracking\CreateTrackingRequest $body,
-        array $headers = []
-    ): \Tracking\API\Tracking\CreateTrackingResponse {
-        $options = [
-            'headers' => $headers,
-
-            'json' => $body->toRequestArray(),
-        ];
-        $resp = $this->httpClient->request('POST', sprintf("/tracking/2025-01/trackings"), $options);
-
-        return $this->parseSingleResource($resp, \Tracking\API\Tracking\CreateTrackingResponse::class);
-    }
     /**
     * @throws AfterShipError
     */
@@ -61,17 +45,20 @@ class Tracking extends APIBase
     /**
     * @throws AfterShipError
     */
-    public function getTrackings(
-        GetTrackingsQuery $query = null,
+    public function retrackTrackingById(
+        string $id,
         array $headers = []
-    ): \Tracking\API\Tracking\GetTrackingsResponse {
+    ): \Tracking\API\Tracking\RetrackTrackingByIdResponse {
+        if ($id === "") {
+            throw ErrorCode::genLocalError(ErrorCode::INVALID_REQUEST, "Param 'id' cannot be an empty string");
+        }
+
         $options = [
             'headers' => $headers,
-            'query' => $query ? $query->toArray() : [],
         ];
-        $resp = $this->httpClient->request('GET', sprintf("/tracking/2025-01/trackings"), $options);
+        $resp = $this->httpClient->request('POST', sprintf("/tracking/2025-01/trackings/%s/retrack", $id), $options);
 
-        return $this->parseSingleResource($resp, \Tracking\API\Tracking\GetTrackingsResponse::class);
+        return $this->parseSingleResource($resp, \Tracking\API\Tracking\RetrackTrackingByIdResponse::class);
     }
     /**
     * @throws AfterShipError
@@ -114,24 +101,6 @@ class Tracking extends APIBase
     /**
     * @throws AfterShipError
     */
-    public function retrackTrackingById(
-        string $id,
-        array $headers = []
-    ): \Tracking\API\Tracking\RetrackTrackingByIdResponse {
-        if ($id === "") {
-            throw ErrorCode::genLocalError(ErrorCode::INVALID_REQUEST, "Param 'id' cannot be an empty string");
-        }
-
-        $options = [
-            'headers' => $headers,
-        ];
-        $resp = $this->httpClient->request('POST', sprintf("/tracking/2025-01/trackings/%s/retrack", $id), $options);
-
-        return $this->parseSingleResource($resp, \Tracking\API\Tracking\RetrackTrackingByIdResponse::class);
-    }
-    /**
-    * @throws AfterShipError
-    */
     public function markTrackingCompletedById(
         string $id,
         \Tracking\API\Tracking\MarkTrackingCompletedByIdRequest $body,
@@ -149,5 +118,36 @@ class Tracking extends APIBase
         $resp = $this->httpClient->request('POST', sprintf("/tracking/2025-01/trackings/%s/mark-as-completed", $id), $options);
 
         return $this->parseSingleResource($resp, \Tracking\API\Tracking\MarkTrackingCompletedByIdResponse::class);
+    }
+    /**
+    * @throws AfterShipError
+    */
+    public function getTrackings(
+        GetTrackingsQuery $query = null,
+        array $headers = []
+    ): \Tracking\API\Tracking\GetTrackingsResponse {
+        $options = [
+            'headers' => $headers,
+            'query' => $query ? $query->toArray() : [],
+        ];
+        $resp = $this->httpClient->request('GET', sprintf("/tracking/2025-01/trackings"), $options);
+
+        return $this->parseSingleResource($resp, \Tracking\API\Tracking\GetTrackingsResponse::class);
+    }
+    /**
+    * @throws AfterShipError
+    */
+    public function createTracking(
+        \Tracking\API\Tracking\CreateTrackingRequest $body,
+        array $headers = []
+    ): \Tracking\API\Tracking\CreateTrackingResponse {
+        $options = [
+            'headers' => $headers,
+
+            'json' => $body->toRequestArray(),
+        ];
+        $resp = $this->httpClient->request('POST', sprintf("/tracking/2025-01/trackings"), $options);
+
+        return $this->parseSingleResource($resp, \Tracking\API\Tracking\CreateTrackingResponse::class);
     }
 }
