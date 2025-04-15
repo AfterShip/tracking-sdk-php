@@ -5,8 +5,9 @@
  */
 namespace Tracking;
 
-use Tracking\API\Courier;
 use Tracking\API\EstimatedDeliveryDate;
+use Tracking\API\Courier;
+use Tracking\API\CourierConnection;
 use Tracking\API\Tracking;
 use Tracking\Exception\AfterShipError;
 
@@ -17,13 +18,17 @@ class Client
     private static $instance = null;
 
     /**
+     * @var EstimatedDeliveryDate
+     */
+    public $estimated_delivery_date;
+    /**
      * @var Courier
      */
     public $courier;
     /**
-     * @var EstimatedDeliveryDate
+     * @var CourierConnection
      */
-    public $estimated_delivery_date;
+    public $courier_connection;
     /**
      * @var Tracking
      */
@@ -36,8 +41,9 @@ class Client
         $config = new Config($conf);
         $this->config = $config;
 
-        $this->courier = new Courier(new Transport\Http($config));
         $this->estimated_delivery_date = new EstimatedDeliveryDate(new Transport\Http($config));
+        $this->courier = new Courier(new Transport\Http($config));
+        $this->courier_connection = new CourierConnection(new Transport\Http($config));
         $this->tracking = new Tracking(new Transport\Http($config));
     }
 

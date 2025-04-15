@@ -7,7 +7,7 @@ namespace Tracking\API\Courier;
 
 use Tracking\Model\Base\Base;
 
-class GetAllCouriersResponse extends Base
+class GetCouriersResponse extends Base
 {
     /**
      * @var int Total count of courier objects

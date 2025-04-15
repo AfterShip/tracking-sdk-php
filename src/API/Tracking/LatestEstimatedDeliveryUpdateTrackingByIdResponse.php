@@ -29,4 +29,8 @@ class LatestEstimatedDeliveryUpdateTrackingByIdResponse extends Base
      * @var string|null For a date range EDD format, the date and time for the upper end of the range.
      */
     public $datetime_max;
+    /**
+     * @var string|null Explains the reason for a change to the latest_estimated_delivery. This string will only have a value if:1. The source for the latest EDD is AfterShip EDD. 2. The reason for the change is known.For a comprehensive list of reasons, please refer to this document.
+     */
+    public $revise_reason;
 }

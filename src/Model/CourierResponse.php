@@ -7,14 +7,14 @@ namespace Tracking\Model;
 
 use Tracking\Model\Base\Base;
 
-class DataCourierResponseV1 extends Base
+class CourierResponse extends Base
 {
     /**
-     * @var int Total count of courier objects
+     * @var \Tracking\Model\Meta Meta data
      */
-    public $total;
+    public $meta;
     /**
-     * @var \Tracking\Model\Courier[] Array of  object.
+     * @var DataCourierResponse
      */
-    public $couriers;
+    public $data;
 }

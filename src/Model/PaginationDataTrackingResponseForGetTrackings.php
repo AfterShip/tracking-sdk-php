@@ -7,7 +7,7 @@ namespace Tracking\Model;
 
 use Tracking\Model\Base\Base;
 
-class PaginationDataTrackingResponseGetMultipleV1 extends Base
+class PaginationDataTrackingResponseForGetTrackings extends Base
 {
     /**
      * @var int The total number of trackings.

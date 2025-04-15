@@ -118,22 +118,6 @@ class UpdateTrackingByIdRequest extends Base
      */
     public $destination_raw_location;
     /**
-     * @var string (Legacy) Replaced by `origin_country_region`. Additional field required by some carriers to retrieve the tracking info. The origin country/region of the shipment. Refer to our article on  for more details.
-     */
-    public $tracking_origin_country_region;
-    /**
-     * @var string (Legacy) Replaced by `destination_country_region`. Additional field required by some carriers to retrieve the tracking info. The destination country/region of the shipment. Refer to our article on  for more details.
-     */
-    public $tracking_destination_country_region;
-    /**
-     * @var string (Legacy) Replaced by `destination_postal_code`. Additional field required by some carriers to retrieve the tracking info. The postal code of the recipient’s address. Refer to our article on  for more details.
-     */
-    public $tracking_postal_code;
-    /**
-     * @var string (Legacy) Replaced by `destination_state`. Additional field required by some carriers to retrieve the tracking info. The state/province of the recipient’s address. Refer to our article on  for more details.
-     */
-    public $tracking_state;
-    /**
      * @var string The location_id refers to the place where you fulfilled the items.  - If you provide a location_id, the system will automatically use it as the tracking's origin address. However, passing both location_id and any origin address information simultaneously is not allowed.- Please make sure you add your locations .
      */
     public $location_id;

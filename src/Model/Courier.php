@@ -26,7 +26,7 @@ class Courier extends Base
      */
     public $other_name;
     /**
-     * @var string Website link of courier
+     * @var string|null Website link of courier
      */
     public $web_url;
     /**
@@ -38,7 +38,7 @@ class Courier extends Base
      */
     public $optional_fields;
     /**
-     * @var string Default language of tracking results
+     * @var string|null Default language of tracking results
      */
     public $default_language;
     /**
@@ -49,4 +49,8 @@ class Courier extends Base
      * @var array[] Country/Region code (ISO Alpha-3) where the courier provides service
      */
     public $service_from_country_regions;
+    /**
+     * @var CredentialsCourier Refers to the authentication details required for each specific carrier (such as API keys, username, password, etc.) that the user must provide to create a carrier connection. The content varies by carrier.
+     */
+    public $credentials;
 }
