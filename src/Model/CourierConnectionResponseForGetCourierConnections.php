@@ -7,14 +7,14 @@ namespace Tracking\Model;
 
 use Tracking\Model\Base\Base;
 
-class TrackingResponseV1 extends Base
+class CourierConnectionResponseForGetCourierConnections extends Base
 {
     /**
-     * @var \Tracking\Model\MetaV1 Meta data
+     * @var \Tracking\Model\Meta Meta data
      */
     public $meta;
     /**
-     * @var \Tracking\Model\Tracking Object describes the tracking information.<div style="display:none; height: 0"></div>
+     * @var DataCourierConnectionResponseForGetCourierConnections
      */
     public $data;
 }

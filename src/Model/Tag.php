@@ -7,7 +7,7 @@ namespace Tracking\Model;
 
 use Tracking\Model\Base\Base;
 
-class TagV1
+class Tag
 {
     const PENDING = "Pending";
     const INFO_RECEIVED = "InfoReceived";

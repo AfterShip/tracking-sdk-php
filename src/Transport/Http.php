@@ -21,7 +21,7 @@ class Http
     private $config;
     const CONTENT_TYPE = 'application/json';
 
-    const SDK_VERSION = '10.2.1';
+    const SDK_VERSION = '11.0.0';
 
     public function __construct(Config $config)
     {

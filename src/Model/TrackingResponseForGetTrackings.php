@@ -7,14 +7,14 @@ namespace Tracking\Model;
 
 use Tracking\Model\Base\Base;
 
-class TrackingResponseGetMultipleV1 extends Base
+class TrackingResponseForGetTrackings extends Base
 {
     /**
-     * @var \Tracking\Model\MetaV1 Meta data
+     * @var \Tracking\Model\Meta Meta data
      */
     public $meta;
     /**
-     * @var DataTrackingResponseGetMultipleV1
+     * @var DataTrackingResponseForGetTrackings
      */
     public $data;
 }

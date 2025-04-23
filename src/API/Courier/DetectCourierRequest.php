@@ -20,7 +20,7 @@ class DetectCourierRequest extends Base
     /**
      * @var string The postal code of receiver's address. Required by some couriers. Refer to  for more details
      */
-    public $tracking_postal_code;
+    public $destination_postal_code;
     /**
      * @var string Shipping date in `YYYYMMDD` format. Required by some couriers. Refer to  for more details
      */
@@ -34,19 +34,11 @@ class DetectCourierRequest extends Base
      */
     public $tracking_key;
     /**
-     * @var string Origin Country/Region of the shipment for a specific courier. Required by some couriers.
-     */
-    public $tracking_origin_country_region;
-    /**
-     * @var string Destination Country/Region of the shipment for a specific courier. Required by some couriers. Refer to  for more details
-     */
-    public $tracking_destination_country_region;
-    /**
      * @var string State of the destination shipping address of the shipment. Required by some couriers.
      */
-    public $tracking_state;
+    public $destination_state;
     /**
-     * @var string|null|\Tracking\Model\SlugGroupV1 Slug group is a group of slugs which belong to same courier. For example, when you inpit "fedex-group" as slug_group, AfterShip will detect the tracking with "fedex-uk", "fedex-fims", and other slugs which belong to "fedex". It cannot be used with slug at the same time. (
+     * @var string|null|\Tracking\Model\SlugGroup Slug group is a group of slugs which belong to same courier. For example, when you inpit "fedex-group" as slug_group, AfterShip will detect the tracking with "fedex-uk", "fedex-fims", and other slugs which belong to "fedex". It cannot be used with slug at the same time. (
      */
     public $slug_group;
     /**

@@ -54,7 +54,7 @@ class Checkpoint extends Base
      */
     public $message;
     /**
-     * @var string|null|\Tracking\Model\TagV1 Current status of tracking. (
+     * @var string|null|\Tracking\Model\Tag Current status of tracking. (
      */
     public $tag;
     /**

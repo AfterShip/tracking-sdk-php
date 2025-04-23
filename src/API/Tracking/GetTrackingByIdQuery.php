@@ -8,7 +8,7 @@ namespace Tracking\API\Tracking;
 class GetTrackingByIdQuery extends \Tracking\API\Base\QueryBase
 {
     /**
-     * @var string|null List of fields to include in the response. Use comma for multiple values. Fields to include: `tracking_postal_code`, `tracking_ship_date`, `tracking_account_number`, `tracking_key`, `tracking_origin_country_region`, `tracking_destination_country_region`, `tracking_state`, `title`, `order_id`, `tag`, `checkpoints`
+     * @var string|null List of fields to include in the response. Use comma for multiple values. Fields to include: `destination_postal_code`, `tracking_ship_date`, `tracking_account_number`, `tracking_key`, `origin_country_region`, `destination_country_region`, `destination_state`, `title`, `order_id`, `tag`, `checkpoints`
      */
     public $fields;
     /**

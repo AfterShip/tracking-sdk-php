@@ -7,7 +7,7 @@ namespace Tracking\Model;
 
 use Tracking\Model\Base\Base;
 
-class MetaV1 extends Base
+class Meta extends Base
 {
     /**
      * @var int meta code

@@ -7,7 +7,7 @@ namespace Tracking\Model;
 
 use Tracking\Model\Base\Base;
 
-class SlugGroupV1
+class SlugGroup
 {
     const AMAZON_GROUP = "amazon-group";
     const FEDEX_GROUP = "fedex-group";

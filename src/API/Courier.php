@@ -9,6 +9,7 @@ use Tracking\API\Base\APIBase;
 use Tracking\Exception\AfterShipError;
 use Tracking\Exception\ErrorCode;
 use Tracking\Transport\Http;
+use Tracking\API\Courier\GetCouriersQuery;
 
 class Courier extends APIBase
 {
@@ -22,28 +23,17 @@ class Courier extends APIBase
     /**
     * @throws AfterShipError
     */
-    public function getAllCouriers(
+    public function getCouriers(
+        GetCouriersQuery $query = null,
         array $headers = []
-    ): \Tracking\API\Courier\GetAllCouriersResponse {
+    ): \Tracking\API\Courier\GetCouriersResponse {
         $options = [
             'headers' => $headers,
+            'query' => $query ? $query->toArray() : [],
         ];
-        $resp = $this->httpClient->request('GET', sprintf("/tracking/2025-01/couriers/all"), $options);
+        $resp = $this->httpClient->request('GET', sprintf("/tracking/2025-04/couriers"), $options);
 
-        return $this->parseSingleResource($resp, \Tracking\API\Courier\GetAllCouriersResponse::class);
-    }
-    /**
-    * @throws AfterShipError
-    */
-    public function getUserCouriers(
-        array $headers = []
-    ): \Tracking\API\Courier\GetUserCouriersResponse {
-        $options = [
-            'headers' => $headers,
-        ];
-        $resp = $this->httpClient->request('GET', sprintf("/tracking/2025-01/couriers"), $options);
-
-        return $this->parseSingleResource($resp, \Tracking\API\Courier\GetUserCouriersResponse::class);
+        return $this->parseSingleResource($resp, \Tracking\API\Courier\GetCouriersResponse::class);
     }
     /**
     * @throws AfterShipError
@@ -57,7 +47,7 @@ class Courier extends APIBase
 
             'json' => $body->toRequestArray(),
         ];
-        $resp = $this->httpClient->request('POST', sprintf("/tracking/2025-01/couriers/detect"), $options);
+        $resp = $this->httpClient->request('POST', sprintf("/tracking/2025-04/couriers/detect"), $options);
 
         return $this->parseSingleResource($resp, \Tracking\API\Courier\DetectCourierResponse::class);
     }

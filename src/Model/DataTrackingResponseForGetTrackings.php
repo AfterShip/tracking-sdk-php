@@ -7,10 +7,10 @@ namespace Tracking\Model;
 
 use Tracking\Model\Base\Base;
 
-class DataTrackingResponseGetMultipleV1 extends Base
+class DataTrackingResponseForGetTrackings extends Base
 {
     /**
-     * @var PaginationDataTrackingResponseGetMultipleV1 The Pagination holds the information for the pagination when the response contains multiple objects.
+     * @var PaginationDataTrackingResponseForGetTrackings The Pagination holds the information for the pagination when the response contains multiple objects.
      */
     public $pagination;
     /**
