@@ -23,21 +23,6 @@ class Courier extends APIBase
     /**
     * @throws AfterShipError
     */
-    public function getCouriers(
-        GetCouriersQuery $query = null,
-        array $headers = []
-    ): \Tracking\API\Courier\GetCouriersResponse {
-        $options = [
-            'headers' => $headers,
-            'query' => $query ? $query->toArray() : [],
-        ];
-        $resp = $this->httpClient->request('GET', sprintf("/tracking/2025-04/couriers"), $options);
-
-        return $this->parseSingleResource($resp, \Tracking\API\Courier\GetCouriersResponse::class);
-    }
-    /**
-    * @throws AfterShipError
-    */
     public function detectCourier(
         \Tracking\API\Courier\DetectCourierRequest $body,
         array $headers = []
@@ -47,8 +32,23 @@ class Courier extends APIBase
 
             'json' => $body->toRequestArray(),
         ];
-        $resp = $this->httpClient->request('POST', sprintf("/tracking/2025-04/couriers/detect"), $options);
+        $resp = $this->httpClient->request('POST', sprintf("/tracking/2025-07/couriers/detect"), $options);
 
         return $this->parseSingleResource($resp, \Tracking\API\Courier\DetectCourierResponse::class);
+    }
+    /**
+    * @throws AfterShipError
+    */
+    public function getCouriers(
+        GetCouriersQuery $query = null,
+        array $headers = []
+    ): \Tracking\API\Courier\GetCouriersResponse {
+        $options = [
+            'headers' => $headers,
+            'query' => $query ? $query->toArray() : [],
+        ];
+        $resp = $this->httpClient->request('GET', sprintf("/tracking/2025-07/couriers"), $options);
+
+        return $this->parseSingleResource($resp, \Tracking\API\Courier\GetCouriersResponse::class);
     }
 }

@@ -16,5 +16,4 @@ class AdditionalFields
     const ORIGIN_COUNTRY_REGION = "origin_country_region";
     const DESTINATION_COUNTRY_REGION = "destination_country_region";
     const TRACKING_SHIP_DATE = "tracking_ship_date";
-    const CUSTOMERS_X_PHONE_NUMBER = "customers[x].phone_number";
 }
