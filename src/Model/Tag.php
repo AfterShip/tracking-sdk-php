@@ -7,15 +7,15 @@ namespace Tracking\Model;
 
 use Tracking\Model\Base\Base;
 
-class Tag
+enum Tag: string
 {
-    const PENDING = "Pending";
-    const INFO_RECEIVED = "InfoReceived";
-    const IN_TRANSIT = "InTransit";
-    const OUT_FOR_DELIVERY = "OutForDelivery";
-    const ATTEMPT_FAIL = "AttemptFail";
-    const DELIVERED = "Delivered";
-    const AVAILABLE_FOR_PICKUP = "AvailableForPickup";
-    const EXCEPTION = "Exception";
-    const EXPIRED = "Expired";
+    case PENDING = "Pending";
+    case INFO_RECEIVED = "InfoReceived";
+    case IN_TRANSIT = "InTransit";
+    case OUT_FOR_DELIVERY = "OutForDelivery";
+    case ATTEMPT_FAIL = "AttemptFail";
+    case DELIVERED = "Delivered";
+    case AVAILABLE_FOR_PICKUP = "AvailableForPickup";
+    case EXCEPTION = "Exception";
+    case EXPIRED = "Expired";
 }

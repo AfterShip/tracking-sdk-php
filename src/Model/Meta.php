@@ -10,15 +10,18 @@ use Tracking\Model\Base\Base;
 class Meta extends Base
 {
     /**
-     * @var int meta code
+     * @var int|null meta code
+     * @required
      */
     public $code;
+
     /**
-     * @var string error message, only exist if the response status is not 2xx
+     * @var string|null error message, only exist if the response status is not 2xx
      */
     public $message;
+
     /**
-     * @var string|null|string error type, only exist if the response status is not 2xx
+     * @var \Tracking\Model\MetaType|null error type, only exist if the response status is not 2xx
      */
     public $type;
 }

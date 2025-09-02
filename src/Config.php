@@ -54,9 +54,9 @@ class Config
     const AUTHENTICATION_TYPE_AES = 'AES';
     const AUTHENTICATION_TYPE_RSA = 'RSA';
 
-    const SDK_PREFIX = 'AFTERSHIP_TRACKING_SDK'; //TPL
+    const SDK_PREFIX = 'AFTERSHIP_TRACKING_SDK_';
     const DEFAULT_MAX_RETRY = 2;
-    const DEFAULT_TIMEOUT = 10000;
+    const DEFAULT_TIMEOUT = 30000;
     const DEFAULT_DOMAIN = 'https://api.aftership.com';
 
     /**

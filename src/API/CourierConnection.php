@@ -9,7 +9,7 @@ use Tracking\API\Base\APIBase;
 use Tracking\Exception\AfterShipError;
 use Tracking\Exception\ErrorCode;
 use Tracking\Transport\Http;
-use Tracking\API\CourierConnection\GetCourierConnectionsQuery;
+use Tracking\Model\GetCourierConnectionsQuery;
 
 class CourierConnection extends APIBase
 {
@@ -23,62 +23,62 @@ class CourierConnection extends APIBase
     /**
     * @throws AfterShipError
     */
-    public function getCourierConnectionsById(
-        string $id,
-        array $headers = []
-    ): \Tracking\API\CourierConnection\GetCourierConnectionsByIdResponse {
-        if ($id === "") {
-            throw ErrorCode::genLocalError(ErrorCode::INVALID_REQUEST, "Param 'id' cannot be an empty string");
-        }
-
-        $options = [
-            'headers' => $headers,
-        ];
-        $resp = $this->httpClient->request('GET', sprintf("/tracking/2025-07/courier-connections/%s", $id), $options);
-
-        return $this->parseSingleResource($resp, \Tracking\API\CourierConnection\GetCourierConnectionsByIdResponse::class);
-    }
-    /**
-    * @throws AfterShipError
-    */
     public function getCourierConnections(
-        GetCourierConnectionsQuery $query = null,
+        ?GetCourierConnectionsQuery $query = null,
         array $headers = []
-    ): \Tracking\API\CourierConnection\GetCourierConnectionsResponse {
+    ): \Tracking\Model\GetCourierConnectionsResponse {
         $options = [
             'headers' => $headers,
             'query' => $query ? $query->toArray() : [],
         ];
-        $resp = $this->httpClient->request('GET', sprintf("/tracking/2025-07/courier-connections"), $options);
+        $httpResp = $this->httpClient->request('GET', sprintf("/tracking/2025-07/courier-connections"), $options);
 
-        return $this->parseSingleResource($resp, \Tracking\API\CourierConnection\GetCourierConnectionsResponse::class);
+        return $this->processResponse($httpResp, \Tracking\Model\GetCourierConnectionsResponse::class, \Tracking\Model\GetCourierConnectionsResponseData::class);
     }
     /**
     * @throws AfterShipError
     */
     public function postCourierConnections(
-        \Tracking\API\CourierConnection\PostCourierConnectionsRequest $body,
+        \Tracking\Model\PostCourierConnectionsRequest $body,
         array $headers = []
-    ): \Tracking\API\CourierConnection\PostCourierConnectionsResponse {
+    ): \Tracking\Model\PostCourierConnectionsResponse {
         $options = [
             'headers' => $headers,
 
             'json' => $body->toRequestArray(),
         ];
-        $resp = $this->httpClient->request('POST', sprintf("/tracking/2025-07/courier-connections"), $options);
+        $httpResp = $this->httpClient->request('POST', sprintf("/tracking/2025-07/courier-connections"), $options);
 
-        return $this->parseSingleResource($resp, \Tracking\API\CourierConnection\PostCourierConnectionsResponse::class);
+        return $this->processResponse($httpResp, \Tracking\Model\PostCourierConnectionsResponse::class, \Tracking\Model\CourierConnection::class);
+    }
+    /**
+    * @throws AfterShipError
+    */
+    public function getCourierConnectionsById(
+        string $id,
+        array $headers = []
+    ): \Tracking\Model\GetCourierConnectionsByIdResponse {
+        if ($id === "") {
+            throw ErrorCode::genLocalError(ErrorCode::BAD_REQUEST, "Param 'id' cannot be an empty string");
+        }
+
+        $options = [
+            'headers' => $headers,
+        ];
+        $httpResp = $this->httpClient->request('GET', sprintf("/tracking/2025-07/courier-connections/%s", $id), $options);
+
+        return $this->processResponse($httpResp, \Tracking\Model\GetCourierConnectionsByIdResponse::class, \Tracking\Model\CourierConnection::class);
     }
     /**
     * @throws AfterShipError
     */
     public function putCourierConnectionsById(
         string $id,
-        \Tracking\API\CourierConnection\PutCourierConnectionsByIdRequest $body,
+        \Tracking\Model\PutCourierConnectionsByIdRequest $body,
         array $headers = []
-    ): \Tracking\API\CourierConnection\PutCourierConnectionsByIdResponse {
+    ): \Tracking\Model\PutCourierConnectionsByIdResponse {
         if ($id === "") {
-            throw ErrorCode::genLocalError(ErrorCode::INVALID_REQUEST, "Param 'id' cannot be an empty string");
+            throw ErrorCode::genLocalError(ErrorCode::BAD_REQUEST, "Param 'id' cannot be an empty string");
         }
 
         $options = [
@@ -86,9 +86,9 @@ class CourierConnection extends APIBase
 
             'json' => $body->toRequestArray(),
         ];
-        $resp = $this->httpClient->request('PATCH', sprintf("/tracking/2025-07/courier-connections/%s", $id), $options);
+        $httpResp = $this->httpClient->request('PATCH', sprintf("/tracking/2025-07/courier-connections/%s", $id), $options);
 
-        return $this->parseSingleResource($resp, \Tracking\API\CourierConnection\PutCourierConnectionsByIdResponse::class);
+        return $this->processResponse($httpResp, \Tracking\Model\PutCourierConnectionsByIdResponse::class, \Tracking\Model\CourierConnection::class);
     }
     /**
     * @throws AfterShipError
@@ -96,16 +96,16 @@ class CourierConnection extends APIBase
     public function deleteCourierConnectionsById(
         string $id,
         array $headers = []
-    ): \Tracking\API\CourierConnection\DeleteCourierConnectionsByIdResponse {
+    ): \Tracking\Model\DeleteCourierConnectionsByIdResponse {
         if ($id === "") {
-            throw ErrorCode::genLocalError(ErrorCode::INVALID_REQUEST, "Param 'id' cannot be an empty string");
+            throw ErrorCode::genLocalError(ErrorCode::BAD_REQUEST, "Param 'id' cannot be an empty string");
         }
 
         $options = [
             'headers' => $headers,
         ];
-        $resp = $this->httpClient->request('DELETE', sprintf("/tracking/2025-07/courier-connections/%s", $id), $options);
+        $httpResp = $this->httpClient->request('DELETE', sprintf("/tracking/2025-07/courier-connections/%s", $id), $options);
 
-        return $this->parseSingleResource($resp, \Tracking\API\CourierConnection\DeleteCourierConnectionsByIdResponse::class);
+        return $this->processResponse($httpResp, \Tracking\Model\DeleteCourierConnectionsByIdResponse::class, \Tracking\Model\CourierConnection::class);
     }
 }

@@ -23,32 +23,32 @@ class EstimatedDeliveryDate extends APIBase
     * @throws AfterShipError
     */
     public function predict(
-        \Tracking\API\EstimatedDeliveryDate\PredictRequest $body,
+        \Tracking\Model\EstimatedDeliveryDateRequest $body,
         array $headers = []
-    ): \Tracking\API\EstimatedDeliveryDate\PredictResponse {
+    ): \Tracking\Model\PredictResponse {
         $options = [
             'headers' => $headers,
 
             'json' => $body->toRequestArray(),
         ];
-        $resp = $this->httpClient->request('POST', sprintf("/tracking/2025-07/estimated-delivery-date/predict"), $options);
+        $httpResp = $this->httpClient->request('POST', sprintf("/tracking/2025-07/estimated-delivery-date/predict"), $options);
 
-        return $this->parseSingleResource($resp, \Tracking\API\EstimatedDeliveryDate\PredictResponse::class);
+        return $this->processResponse($httpResp, \Tracking\Model\PredictResponse::class, \Tracking\Model\EstimatedDeliveryDateResponse::class);
     }
     /**
     * @throws AfterShipError
     */
     public function predictBatch(
-        \Tracking\API\EstimatedDeliveryDate\PredictBatchRequest $body,
+        \Tracking\Model\PredictBatchRequest $body,
         array $headers = []
-    ): \Tracking\API\EstimatedDeliveryDate\PredictBatchResponse {
+    ): \Tracking\Model\PredictBatchResponse {
         $options = [
             'headers' => $headers,
 
             'json' => $body->toRequestArray(),
         ];
-        $resp = $this->httpClient->request('POST', sprintf("/tracking/2025-07/estimated-delivery-date/predict-batch"), $options);
+        $httpResp = $this->httpClient->request('POST', sprintf("/tracking/2025-07/estimated-delivery-date/predict-batch"), $options);
 
-        return $this->parseSingleResource($resp, \Tracking\API\EstimatedDeliveryDate\PredictBatchResponse::class);
+        return $this->processResponse($httpResp, \Tracking\Model\PredictBatchResponse::class, \Tracking\Model\PredictBatchResponseData::class);
     }
 }

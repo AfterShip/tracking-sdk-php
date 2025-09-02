@@ -16,7 +16,7 @@ class AfterShipError extends \Exception
 
     public function __construct($message, $errorCode, $statusCode, $metaCode = null, $responseBody = null, $responseHeader = null)
     {
-        parent::__construct($message, $statusCode);
+        parent::__construct($message, $statusCode === null ? 0 : $statusCode);
         $this->metaCode = $metaCode;
         $this->message = $message;
         $this->errorCode = $errorCode;

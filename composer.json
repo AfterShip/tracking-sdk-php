@@ -4,17 +4,7 @@
     "license": "MIT",
     "type": "library",
     "keywords": [
-        "aftership",
-        "tracking",
-        "track",
-        "fedex",
-        "ups",
-        "usps",
-        "dhl",
-        "shipping",
-        "fulfillment",
-        "couriers",
-        "carriers"
+        "aftership", "tracking", "dhl"
     ],
     "authors": [
         {
@@ -23,12 +13,12 @@
         }
     ],
     "require": {
-        "php": ">=8.0.0",
+        "php": ">=8.1.0",
         "guzzlehttp/guzzle": "7.*",
         "phpseclib/phpseclib": "^3.0.17",
-        "symfony/serializer": "^5.4 || ^6.4 || ^7.0",
-        "symfony/property-access": "^5.4 || ^6.4 || ^7.0",
-        "symfony/property-info": "^5.4 || ^6.4 || ^7.0",
+        "symfony/serializer": "^6.4 || ^7.0",
+        "symfony/property-access": "^6.4 || ^7.0",
+        "symfony/property-info": "^6.4 || ^7.0",
         "phpdocumentor/reflection-docblock": ">=5.4",
         "ext-json": "*",
         "ext-mbstring": "*"
