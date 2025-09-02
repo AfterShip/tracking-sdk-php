@@ -20,7 +20,7 @@ class CustomNormalizer implements NormalizerInterface, SerializerAwareInterface
         $this->normalizer = new ObjectNormalizer();
     }
 
-    public function normalize(mixed $object, string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
+    public function normalize(mixed $object, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         if ($this->serializer) {
             $this->normalizer->setSerializer($this->serializer);
@@ -33,7 +33,7 @@ class CustomNormalizer implements NormalizerInterface, SerializerAwareInterface
         });
     }
 
-    public function supportsNormalization(mixed $data, string $format = null, array $context = []): bool
+    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
         return $this->normalizer->supportsNormalization($data, $format, $context);
     }

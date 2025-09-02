@@ -10,303 +10,377 @@ use Tracking\Model\Base\Base;
 class Tracking extends Base
 {
     /**
-     * @var string A  system-generated tracking ID by default, which can be customized by the user when creating a tracking.
+     * @var string|null A  system-generated tracking ID by default, which can be customized by the user when creating a tracking.
      */
     public $id;
+
     /**
-     * @var string The length of the tracking ID has been increased from 24 characters to 32 characters. We will use the legacy_id field to store the original 24-character tracking ID to maintain compatibility with existing data. Therefore, all tracking endpoints will continue to work with the legacy_id field as before.
+     * @var string|null The length of the tracking ID has been increased from 24 characters to 32 characters. We will use the legacy_id field to store the original 24-character tracking ID to maintain compatibility with existing data. Therefore, all tracking endpoints will continue to work with the legacy_id field as before.
      */
     public $legacy_id;
+
     /**
-     * @var string The date and time the shipment was imported or added to AfterShip. It uses the format `YYYY-MM-DDTHH:mm:ssZ` for the timezone GMT +0.
+     * @var string|null The date and time the shipment was imported or added to AfterShip. It uses the format `YYYY-MM-DDTHH:mm:ssZ` for the timezone GMT +0.
      */
     public $created_at;
+
     /**
-     * @var string The date and time the shipment was updated. It uses the format `YYYY-MM-DDTHH:mm:ssZ` for the timezone GMT +0.
+     * @var string|null The date and time the shipment was updated. It uses the format `YYYY-MM-DDTHH:mm:ssZ` for the timezone GMT +0.
      */
     public $updated_at;
+
     /**
-     * @var string Tracking number.
+     * @var string|null Tracking number.
      */
     public $tracking_number;
+
     /**
-     * @var string Unique courier code. When importing a shipment with no courier slug and the tracking number can’t be recognized, the courier will be marked as `unrecognized`. Get courier codes .
+     * @var string|null Unique courier code. When importing a shipment with no courier slug and the tracking number can’t be recognized, the courier will be marked as `unrecognized`. Get courier codes .
      */
     public $slug;
+
     /**
-     * @var bool Whether or not AfterShip will continue tracking the shipment. Value is false when no further updates for a few days since last update.
+     * @var bool|null Whether or not AfterShip will continue tracking the shipment. Value is false when no further updates for a few days since last update.
      */
     public $active;
+
     /**
      * @var array|null Custom fields that accept an object with string field. In order to protect the privacy of your customers, do not include any  in custom fields.
      */
     public $custom_fields;
+
     /**
      * @var int|null Total transit time in days.- For delivered shipments: Transit time (in days) = Delivered date - Pick-up date- For undelivered shipments: Transit time (in days) = Current date - Pick-up dateValue as `null` for the shipment without pick-up date.
      */
     public $transit_time;
+
     /**
      * @var string|null The  for the origin country/region. E.g. USA for the United States.
      */
     public $origin_country_region;
+
     /**
      * @var string|null The state of the sender’s address.
      */
     public $origin_state;
+
     /**
      * @var string|null The city of the sender’s address.
      */
     public $origin_city;
+
     /**
      * @var string|null The postal code of the sender’s address.
      */
     public $origin_postal_code;
+
     /**
      * @var string|null The sender address that the shipment is shipping from.
      */
     public $origin_raw_location;
+
     /**
      * @var string|null The  for the destination country/region. E.g. USA for the United States.
      */
     public $destination_country_region;
+
     /**
      * @var string|null The state of the recipient’s address.
      */
     public $destination_state;
+
     /**
      * @var string|null The city of the recipient’s address.
      */
     public $destination_city;
+
     /**
      * @var string|null The postal code of the recipient’s address.
      */
     public $destination_postal_code;
+
     /**
      * @var string|null The shipping address that the shipment is shipping to.
      */
     public $destination_raw_location;
+
     /**
      * @var string|null Destination country/region of the tracking detected from the courier. ISO Alpha-3 (three letters). Value will be `null` if the courier doesn't provide the destination country.
      */
     public $courier_destination_country_region;
+
     /**
-     * @var CourierEstimatedDeliveryDateTracking The field contains the estimated delivery date provided by the carrier.
+     * @var \Tracking\Model\TrackingCourierEstimatedDeliveryDate|null The field contains the estimated delivery date provided by the carrier.
      */
     public $courier_estimated_delivery_date;
+
     /**
      * @var string|null Text field for the note.
      */
     public $note;
+
     /**
      * @var string|null A globally-unique identifier for the order.
      */
     public $order_id;
+
     /**
      * @var string|null The URL for the order in your system or store.
      */
     public $order_id_path;
+
     /**
      * @var string|null The date and time the order was created in your system or store. It uses the format: `YYYY-MM-DDTHH:mm:ssZ` based on whichever timezone you provide.
      */
     public $order_date;
+
     /**
      * @var int|float|null Number of packages under the tracking.
      */
     public $shipment_package_count;
+
     /**
      * @var string|null The date and time the shipment was picked up by the carrier. It uses the timezone where the pickup occured. The format may differ depending on how the carrier provides it:- YYYY-MM-DD- YYYY-MM-DDTHH:mm:ss- YYYY-MM-DDTHH:mm:ssZ
      */
     public $shipment_pickup_date;
+
     /**
      * @var string|null The date and time the shipment was delivered. It uses the shipment recipient’s timezone. The format may differ depending on how the carrier provides it:- YYYY-MM-DD- YYYY-MM-DDTHH:mm:ss- YYYY-MM-DDTHH:mm:ssZ
      */
     public $shipment_delivery_date;
+
     /**
      * @var string|null The carrier service type for the shipment.
      */
     public $shipment_type;
+
     /**
-     * @var ShipmentWeightTracking The shipment_weight field represents the total weight of the shipment. In scenarios where the carrier does not provide this information, you can provide the weight to AfterShip. We will prioritize the data provided by the carrier, if available. The shipment weight will be included in the Response and accessed through the GET API, Webhook, and CSV export. It will also be displayed on the AfterShip Tracking admin. Additionally, it plays a significant role in error-free shipment handling and carbon emission calculations, ensuring accurate and informed decision-making
+     * @var \Tracking\Model\TrackingShipmentWeight|null The shipment_weight field represents the total weight of the shipment. In scenarios where the carrier does not provide this information, you can provide the weight to AfterShip. We will prioritize the data provided by the carrier, if available. The shipment weight will be included in the Response and accessed through the GET API, Webhook, and CSV export. It will also be displayed on the AfterShip Tracking admin. Additionally, it plays a significant role in error-free shipment handling and carbon emission calculations, ensuring accurate and informed decision-making
      */
     public $shipment_weight;
+
     /**
      * @var string|null Signed by information for delivered shipment.
      */
     public $signed_by;
+
     /**
-     * @var string Source of how this tracking is added.
+     * @var string|null Source of how this tracking is added.
      */
     public $source;
+
     /**
-     * @var string|null|\Tracking\Model\Tag Current status of tracking. (
+     * @var \Tracking\Model\Tag|null Current status of tracking. (
      */
     public $tag;
+
     /**
-     * @var string Current subtag of tracking. (
+     * @var string|null Current subtag of tracking. (
      */
     public $subtag;
+
     /**
-     * @var string Normalized tracking message. (
+     * @var string|null Normalized tracking message. (
      */
     public $subtag_message;
+
     /**
-     * @var string By default this field shows the `tracking_number`, but you can customize it as you wish with any info (e.g. the order number).
+     * @var string|null By default this field shows the `tracking_number`, but you can customize it as you wish with any info (e.g. the order number).
      */
     public $title;
+
     /**
-     * @var int|float Number of attempts AfterShip tracks at courier's system.
+     * @var int|float|null Number of attempts AfterShip tracks at courier's system.
      */
     public $tracked_count;
+
     /**
      * @var bool|null Indicates if the shipment is trackable till the final destination.Three possible values:- true- false- null
      */
     public $last_mile_tracking_supported;
+
     /**
      * @var string|null The recipient’s language. If you set up AfterShip notifications in different languages, we use this to send the recipient tracking updates in their preferred language.
      */
     public $language;
+
     /**
-     * @var string Deprecated
+     * @var string|null Deprecated
      */
     public $unique_token;
+
     /**
-     * @var \Tracking\Model\Checkpoint[] Array of checkpoint object describes the checkpoint information.
+     * @var \Tracking\Model\Checkpoint[]|null Array of checkpoint object describes the checkpoint information.
      */
     public $checkpoints;
+
     /**
-     * @var array[] Phone number(s) subscribed to receive sms notifications.
+     * @var string[]|null Phone number(s) subscribed to receive sms notifications.
      */
     public $subscribed_smses;
+
     /**
-     * @var array[] Email address(es) subscribed to receive email notifications.
+     * @var string[]|null Email address(es) subscribed to receive email notifications.
      */
     public $subscribed_emails;
+
     /**
-     * @var bool Whether or not the shipment is returned to sender. Value is `true` when any of its checkpoints has subtag `Exception_010` (returning to sender) or `Exception_011` (returned to sender). Otherwise value is `false`.
+     * @var bool|null Whether or not the shipment is returned to sender. Value is `true` when any of its checkpoints has subtag `Exception_010` (returning to sender) or `Exception_011` (returned to sender). Otherwise value is `false`.
      */
     public $return_to_sender;
+
     /**
      * @var string|null The promised delivery date of the order. It uses the formats:- YYYY-MM-DD- YYYY-MM-DDTHH:mm:ss- YYYY-MM-DDTHH:mm:ssZ
      */
     public $order_promised_delivery_date;
+
     /**
      * @var string|null Shipment delivery type- pickup_at_store- pickup_at_courier- door_to_door
      */
     public $delivery_type;
+
     /**
      * @var string|null Shipment pickup location for receiver
      */
     public $pickup_location;
+
     /**
      * @var string|null Shipment pickup note for receiver
      */
     public $pickup_note;
+
     /**
      * @var string|null Official tracking URL of the courier (if any). The language parameter of this link relies on the destination country/region and the language associated with the shipment, if the data regarding the destination country/region and language of the shipment is not available, AfterShip will set the language parameter of the link to "US" by default.
      */
     public $courier_tracking_link;
+
     /**
      * @var string|null The date and time of the carrier’s first attempt to deliver the package to the recipient.  It uses the shipment recipient’s timezone. The format may differ depending on how the carrier provides it:- YYYY-MM-DDTHH:mm:ss- YYYY-MM-DDTHH:mm:ssZ
      */
     public $first_attempted_at;
+
     /**
      * @var string|null Delivery instructions (delivery date or address) can be modified by visiting the link if supported by a carrier. The language parameter of this link relies on the destination country/region and the language associated with the shipment, if the data regarding the destination country/region and language of the shipment is not available, AfterShip will set the language parameter of the link to "US" by default.
      */
     public $courier_redirect_link;
+
     /**
      * @var string|null Additional field required by some carriers to retrieve the tracking info. The shipper’s carrier account number. Refer to our article on  for more details.
      */
     public $tracking_account_number;
+
     /**
      * @var string|null Additional field required by some carriers to retrieve the tracking info. A type of tracking credential required by some carriers. Refer to our article on  for more details.
      */
     public $tracking_key;
+
     /**
      * @var string|null The date and time when the shipment is shipped by the merchant and ready for pickup by the carrier. The field supports the following formats:- YYYY-MM-DD- YYYY-MM-DDTHH:mm:ss- YYYY-MM-DDTHH:mm:ssZThe field serves two key purposes:- Calculate processing time metrics in the Order-to-delivery Analytics dashboard. To ensure accurate analytics, it's recommended to include timezone information when configuring this value- Required by certain carriers to retrieve tracking information as an additional tracking field.
      */
     public $tracking_ship_date;
+
     /**
      * @var string|null Whether the tracking is delivered on time or not.
      */
     public $on_time_status;
+
     /**
      * @var int|float|null The difference days of the on time.
      */
     public $on_time_difference;
+
     /**
-     * @var array[] The tags of the order.
+     * @var string[]|null The tags of the order.
      */
     public $order_tags;
+
     /**
-     * @var AftershipEstimatedDeliveryDateTracking The estimated delivery date of the shipment provided by AfterShip’s AI and shown to the recipients. It uses the format `YYYY-MM-DD` based on the shipment recipient’s timezone.
+     * @var \Tracking\Model\TrackingAftershipEstimatedDeliveryDate|null The estimated delivery date of the shipment provided by AfterShip’s AI and shown to the recipients. It uses the format `YYYY-MM-DD` based on the shipment recipient’s timezone.
      */
     public $aftership_estimated_delivery_date;
+
     /**
-     * @var CustomEstimatedDeliveryDateTracking Estimated delivery time of the shipment based on your . It uses the format `YYYY-MM-DD` based on the shipment recipient’s timezone.
+     * @var \Tracking\Model\TrackingCustomEstimatedDeliveryDate|null Estimated delivery time of the shipment based on your . It uses the format `YYYY-MM-DD` based on the shipment recipient’s timezone.
      */
     public $custom_estimated_delivery_date;
+
     /**
      * @var string|null A unique, human-readable identifier for the order.
      */
     public $order_number;
+
     /**
-     * @var FirstEstimatedDeliveryTracking The shipment’s original estimated delivery date. It could be provided by the carrier, AfterShip AI, or based on your custom settings. The format of carrier EDDs may differ depending on how the carrier provides it:- YYYY-MM-DD- YYYY-MM-DDTHH:mm:ss- YYYY-MM-DDTHH:mm:ssZ AfterShip AI and custom EDDs always use the format `YYYY-MM-DD`. All EDDs use the shipment recipient’s timezone.
+     * @var \Tracking\Model\TrackingFirstEstimatedDelivery|null The shipment’s original estimated delivery date. It could be provided by the carrier, AfterShip AI, or based on your custom settings. The format of carrier EDDs may differ depending on how the carrier provides it:- YYYY-MM-DD- YYYY-MM-DDTHH:mm:ss- YYYY-MM-DDTHH:mm:ssZ AfterShip AI and custom EDDs always use the format `YYYY-MM-DD`. All EDDs use the shipment recipient’s timezone.
      */
     public $first_estimated_delivery;
+
     /**
-     * @var LatestEstimatedDeliveryTracking The most recently calculated estimated delivery date. It could be provided by the carrier, AfterShip AI, or based on your custom settings. The format of carrier EDDs may differ depending on how the carrier provides it:- YYYY-MM-DD- YYYY-MM-DDTHH:mm:ss- YYYY-MM-DDTHH:mm:ssZ AfterShip AI and custom EDDs always use the format `YYYY-MM-DD`. All EDDs use the shipment recipient’s timezone.
+     * @var \Tracking\Model\TrackingLatestEstimatedDelivery|null The most recently calculated estimated delivery date. It could be provided by the carrier, AfterShip AI, or based on your custom settings. The format of carrier EDDs may differ depending on how the carrier provides it:- YYYY-MM-DD- YYYY-MM-DDTHH:mm:ss- YYYY-MM-DDTHH:mm:ssZ AfterShip AI and custom EDDs always use the format `YYYY-MM-DD`. All EDDs use the shipment recipient’s timezone.
      */
     public $latest_estimated_delivery;
+
     /**
-     * @var array[] Used to add tags to your shipments to help categorize and filter them easily.
+     * @var string[]|null Used to add tags to your shipments to help categorize and filter them easily.
      */
     public $shipment_tags;
+
     /**
      * @var string|null If you have multiple accounts connected for a single carrier on AfterShip, we have introduced the courier_connection_id field to allow you to specify the carrier account associated with each shipment. By providing this information, you enable us to accurately track and monitor your shipments based on the correct carrier account.(</br>In the event that you do not specify the courier_connection_id, we will handle your shipment using the connection that was created earliest among your connected accounts.
      */
     public $courier_connection_id;
+
     /**
-     * @var CarbonEmissionsTracking The model contains the total amount of carbon emissions generated by the shipment. - AfterShip will provide this data only when it is available, and its availability is contingent upon the location and weight information that AfterShip can obtain.- The values will be accessible solely for shipments that have been successfully delivered. However, in the event of a shipping update after the delivery status has been achieved, the value may change.- It’s a paid service and only for Tracking Enterprise users, please contact your customer success manager if you want to know more.
+     * @var \Tracking\Model\TrackingCarbonEmissions|null The model contains the total amount of carbon emissions generated by the shipment. - AfterShip will provide this data only when it is available, and its availability is contingent upon the location and weight information that AfterShip can obtain.- The values will be accessible solely for shipments that have been successfully delivered. However, in the event of a shipping update after the delivery status has been achieved, the value may change.- It’s a paid service and only for Tracking Enterprise users, please contact your customer success manager if you want to know more.
      */
     public $carbon_emissions;
+
     /**
      * @var string|null The location_id refers to the place where you fulfilled the items.  - If you provide a location_id, the system will automatically use it as the tracking's origin address. However, passing both location_id and any origin address information simultaneously is not allowed.- Please make sure you add your locations .
      */
     public $location_id;
+
     /**
      * @var string|null The shipping_method string refers to the chosen method for delivering the package. Merchants typically offer various shipping methods to consumers during the checkout process, such as, Local Delivery, Free Express Worldwide Shipping, etc.
      */
     public $shipping_method;
+
     /**
      * @var int|null By dynamically tracking failed delivery attempts during shipment, this field allows you to pinpoint carriers accountable for the most failures. Analyzing the root cause of these failures enables you to improve carriers' delivery standard operating procedures (SOP), leading to an overall enhancement in delivery service quality.
      */
     public $failed_delivery_attempts;
+
     /**
-     * @var string|null|string The signature_requirement field serves the purpose of validating the service option type, specifically proof of delivery. By collecting the recipient's signature upon delivery, it ensures the package reaches the intended recipient and prevents disputes related to non-delivery or lost packages.</br>
+     * @var \Tracking\Model\TrackingSignatureRequirement|null The signature_requirement field serves the purpose of validating the service option type, specifically proof of delivery. By collecting the recipient's signature upon delivery, it ensures the package reaches the intended recipient and prevents disputes related to non-delivery or lost packages.</br>
      */
     public $signature_requirement;
+
     /**
      * @var string|null The delivery location type represents the secure area where the carrier leaves the package, such as a safe place, locker, mailbox, front porch, etc. This information helps ensure the shipment reaches the intended recipient efficiently, minimizing the risk of theft or damage.
      */
     public $delivery_location_type;
+
     /**
      * @var string|null The tracking URL directs your customers to the shipment tracking page which can display either the default or a customized page based on segmentation rules.- The universal URL is used by default, but you can opt for a custom domain if you have one. Learn how to set up a custom domain .The field is not automatically enabled in API & Webhook. Please contact support if you’d like to enable it.
      */
     public $aftership_tracking_url;
+
     /**
      * @var string|null The order URL directs your customers to the order tracking page, which includes all shipments. It can display either the default or a customized page based on segmentation rules.- The universal URL is used by default, but you can opt for a custom domain if you have one. Learn how to set up a custom domain .The field is not automatically enabled in API & Webhook. Please contact support if you’d like to enable it.
      */
     public $aftership_tracking_order_url;
+
     /**
-     * @var FirstMileTracking The field contains information about the first leg of the shipping starting from the carrier picking up the shipment from the shipper to the point where they hand it over to the last-mile carrier. Once AfterShip detects the shipment is multi-leg, we will populate the first-mile information under this object.
+     * @var \Tracking\Model\TrackingFirstMile|null The field contains information about the first leg of the shipping starting from the carrier picking up the shipment from the shipper to the point where they hand it over to the last-mile carrier. Once AfterShip detects the shipment is multi-leg, we will populate the first-mile information under this object.
      */
     public $first_mile;
+
     /**
-     * @var LastMileTracking This field contains information about the last leg of the shipment, starting from the carrier who hands it over to the last-mile carrier, all the way to delivery. Once AfterShip detects that the shipment involves multiple legs and identifies the last-mile carrier, we will populate the last-mile carrier information in this object. Alternatively, the user can provide this information in this field to specify the last-mile carrier, which is helpful if AfterShip is unable to detect it automatically.
+     * @var \Tracking\Model\TrackingLastMile|null This field contains information about the last leg of the shipment, starting from the carrier who hands it over to the last-mile carrier, all the way to delivery. Once AfterShip detects that the shipment involves multiple legs and identifies the last-mile carrier, we will populate the last-mile carrier information in this object. Alternatively, the user can provide this information in this field to specify the last-mile carrier, which is helpful if AfterShip is unable to detect it automatically.
      */
     public $last_mile;
+
     /**
-     * @var CustomersTracking[] The field contains the customer information associated with the tracking. A maximum of three customer objects are allowed.
+     * @var \Tracking\Model\TrackingCustomers[]|null The field contains the customer information associated with the tracking. A maximum of three customer objects are allowed.
      */
     public $customers;
 }

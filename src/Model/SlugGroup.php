@@ -7,18 +7,18 @@ namespace Tracking\Model;
 
 use Tracking\Model\Base\Base;
 
-class SlugGroup
+enum SlugGroup: string
 {
-    const AMAZON_GROUP = "amazon-group";
-    const FEDEX_GROUP = "fedex-group";
-    const TOLL_GROUP = "toll-group";
-    const TAQBIN_GROUP = "taqbin-group";
-    const TNT_GROUP = "tnt-group";
-    const CJ_GROUP = "cj-group";
-    const HERMES_GROUP = "hermes-group";
-    const DPD_GROUP = "dpd-group";
-    const GLS_GROUP = "gls-group";
-    const DHL_GROUP = "dhl-group";
-    const FASTWAY_GROUP = "fastway-group";
-    const ASENDIA_GROUP = "asendia-group";
+    case AMAZON_GROUP = "amazon-group";
+    case FEDEX_GROUP = "fedex-group";
+    case TOLL_GROUP = "toll-group";
+    case TAQBIN_GROUP = "taqbin-group";
+    case TNT_GROUP = "tnt-group";
+    case CJ_GROUP = "cj-group";
+    case HERMES_GROUP = "hermes-group";
+    case DPD_GROUP = "dpd-group";
+    case GLS_GROUP = "gls-group";
+    case DHL_GROUP = "dhl-group";
+    case FASTWAY_GROUP = "fastway-group";
+    case ASENDIA_GROUP = "asendia-group";
 }

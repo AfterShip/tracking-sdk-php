@@ -10,71 +10,87 @@ use Tracking\Model\Base\Base;
 class Checkpoint extends Base
 {
     /**
-     * @var string The date and time of the checkpoint event was added to AfterShip. It uses the format `YYYY-MM-DDTHH:mm:ssZ` for the timezone GMT +0.
+     * @var string|null The date and time of the checkpoint event was added to AfterShip. It uses the format `YYYY-MM-DDTHH:mm:ssZ` for the timezone GMT +0.
      */
     public $created_at;
+
     /**
-     * @var string The unique code of courier for this checkpoint. Get courier slug
+     * @var string|null The unique code of courier for this checkpoint. Get courier slug
      */
     public $slug;
+
     /**
-     * @var string The date and time of the checkpoint event, provided by the carrier. It uses the timezone of the checkpoint. The format may differ depending on how the carrier provides it:- YYYY-MM-DDTHH:mm:ss- YYYY-MM-DDTHH:mm:ssZ
+     * @var string|null The date and time of the checkpoint event, provided by the carrier. It uses the timezone of the checkpoint. The format may differ depending on how the carrier provides it:- YYYY-MM-DDTHH:mm:ss- YYYY-MM-DDTHH:mm:ssZ
      */
     public $checkpoint_time;
+
     /**
      * @var string|null Location info provided by carrier
      */
     public $location;
+
     /**
      * @var string|null City info provided by carrier
      */
     public $city;
+
     /**
      * @var string|null State info provided by carrier
      */
     public $state;
+
     /**
      * @var string|null Postal code info provided by carrier
      */
     public $zip;
+
     /**
-     * @var CoordinateCheckpoint The latitude and longitude coordinates indicate the precise location of the shipments that are currently in transit.
+     * @var \Tracking\Model\CheckpointCoordinate|null The latitude and longitude coordinates indicate the precise location of the shipments that are currently in transit.
      */
     public $coordinate;
+
     /**
      * @var string|null Country/Region ISO Alpha-3 (three letters) of the checkpoint
      */
     public $country_region;
+
     /**
      * @var string|null Country/Region name of the checkpoint, may also contain other location info.
      */
     public $country_region_name;
+
     /**
-     * @var string Checkpoint message
+     * @var string|null Checkpoint message
      */
     public $message;
+
     /**
-     * @var string|null|\Tracking\Model\Tag Current status of tracking. (
+     * @var \Tracking\Model\Tag|null Current status of tracking. (
      */
     public $tag;
+
     /**
-     * @var string Current subtag of checkpoint. (
+     * @var string|null Current subtag of checkpoint. (
      */
     public $subtag;
+
     /**
-     * @var string Normalized checkpoint message. (
+     * @var string|null Normalized checkpoint message. (
      */
     public $subtag_message;
+
     /**
      * @var string|null Checkpoint raw status provided by courier
      */
     public $raw_tag;
+
     /**
-     * @var EventsCheckpoint[] The array provides details about specific event(s) that occurred  to a shipment, such as "returned_to_sender". You can find the full list of events and reasons </span>- The events' value for the same checkpoint message is subject to change as we consistently strive to enhance the performance of this feature.
+     * @var \Tracking\Model\CheckpointEvents[]|null The array provides details about specific event(s) that occurred  to a shipment, such as "returned_to_sender". You can find the full list of events and reasons </span>- The events' value for the same checkpoint message is subject to change as we consistently strive to enhance the performance of this feature.
      */
     public $events;
+
     /**
-     * @var string|null|string The source of the checkpoint, which can either be from the carrier or when the user marks the tracking as completed.
+     * @var \Tracking\Model\CheckpointSource|null The source of the checkpoint, which can either be from the carrier or when the user marks the tracking as completed.
      */
     public $source;
 }

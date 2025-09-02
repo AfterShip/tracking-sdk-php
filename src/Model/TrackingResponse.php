@@ -10,11 +10,14 @@ use Tracking\Model\Base\Base;
 class TrackingResponse extends Base
 {
     /**
-     * @var \Tracking\Model\Meta Meta data
+     * @var \Tracking\Model\Meta|null Meta data
+     * @required
      */
     public $meta;
+
     /**
-     * @var \Tracking\Model\Tracking Object describes the tracking information.<div style="display:none; height: 0"></div>
+     * @var \Tracking\Model\Tracking|null Object describes the tracking information.<div style="display:none; height: 0"></div>
+     * @required
      */
     public $data;
 }

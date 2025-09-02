@@ -10,47 +10,57 @@ use Tracking\Model\Base\Base;
 class Courier extends Base
 {
     /**
-     * @var string Unique code of courier. Get the slugs from .
+     * @var string|null Unique code of courier. Get the slugs from .
      */
     public $slug;
+
     /**
-     * @var string Name of courier
+     * @var string|null Name of courier
      */
     public $name;
+
     /**
      * @var string|null Contact phone number of courier
      */
     public $phone;
+
     /**
      * @var string|null Other name of courier
      */
     public $other_name;
+
     /**
      * @var string|null Website link of courier
      */
     public $web_url;
+
     /**
-     * @var array[] The extra fields need for tracking, such as `tracking_account_number`, `tracking_postal_code`, `tracking_ship_date`, `tracking_key`, `tracking_destination_country_region`
+     * @var \Tracking\Model\AdditionalFields[]|null The extra fields need for tracking, such as `tracking_account_number`, `tracking_postal_code`, `tracking_ship_date`, `tracking_key`, `tracking_destination_country_region`
      */
     public $required_fields;
+
     /**
-     * @var array[] The extra fields which are optional for tracking. Basically it's the same as required_fields, but the difference is that only some of the tracking numbers require these fields.
+     * @var \Tracking\Model\AdditionalFields[]|null The extra fields which are optional for tracking. Basically it's the same as required_fields, but the difference is that only some of the tracking numbers require these fields.
      */
     public $optional_fields;
+
     /**
      * @var string|null Default language of tracking results
      */
     public $default_language;
+
     /**
-     * @var array[] Other supported languages
+     * @var string[]|null Other supported languages
      */
     public $support_languages;
+
     /**
-     * @var array[] Country/Region code (ISO Alpha-3) where the courier provides service
+     * @var string[]|null Country/Region code (ISO Alpha-3) where the courier provides service
      */
     public $service_from_country_regions;
+
     /**
-     * @var CredentialsCourier Refers to the authentication details required for each specific carrier (such as API keys, username, password, etc.) that the user must provide to create a carrier connection. The content varies by carrier.
+     * @var \Tracking\Model\CourierCredentials|null Refers to the authentication details required for each specific carrier (such as API keys, username, password, etc.) that the user must provide to create a carrier connection. The content varies by carrier.
      */
     public $credentials;
 }

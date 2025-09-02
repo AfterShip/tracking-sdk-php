@@ -9,8 +9,8 @@ use Tracking\API\Base\APIBase;
 use Tracking\Exception\AfterShipError;
 use Tracking\Exception\ErrorCode;
 use Tracking\Transport\Http;
-use Tracking\API\Tracking\GetTrackingByIdQuery;
-use Tracking\API\Tracking\GetTrackingsQuery;
+use Tracking\Model\GetTrackingsQuery;
+use Tracking\Model\GetTrackingByIdQuery;
 
 class Tracking extends APIBase
 {
@@ -24,13 +24,64 @@ class Tracking extends APIBase
     /**
     * @throws AfterShipError
     */
+    public function getTrackings(
+        ?GetTrackingsQuery $query = null,
+        array $headers = []
+    ): \Tracking\Model\GetTrackingsResponse {
+        $options = [
+            'headers' => $headers,
+            'query' => $query ? $query->toArray() : [],
+        ];
+        $httpResp = $this->httpClient->request('GET', sprintf("/tracking/2025-07/trackings"), $options);
+
+        return $this->processResponse($httpResp, \Tracking\Model\GetTrackingsResponse::class, \Tracking\Model\GetTrackingsResponseData::class);
+    }
+    /**
+    * @throws AfterShipError
+    */
+    public function createTracking(
+        \Tracking\Model\CreateTrackingRequest $body,
+        array $headers = []
+    ): \Tracking\Model\CreateTrackingResponse {
+        $options = [
+            'headers' => $headers,
+
+            'json' => $body->toRequestArray(),
+        ];
+        $httpResp = $this->httpClient->request('POST', sprintf("/tracking/2025-07/trackings"), $options);
+
+        return $this->processResponse($httpResp, \Tracking\Model\CreateTrackingResponse::class, \Tracking\Model\Tracking::class);
+    }
+    /**
+    * @throws AfterShipError
+    */
+    public function getTrackingById(
+        string $id,
+        ?GetTrackingByIdQuery $query = null,
+        array $headers = []
+    ): \Tracking\Model\GetTrackingByIdResponse {
+        if ($id === "") {
+            throw ErrorCode::genLocalError(ErrorCode::BAD_REQUEST, "Param 'id' cannot be an empty string");
+        }
+
+        $options = [
+            'headers' => $headers,
+            'query' => $query ? $query->toArray() : [],
+        ];
+        $httpResp = $this->httpClient->request('GET', sprintf("/tracking/2025-07/trackings/%s", $id), $options);
+
+        return $this->processResponse($httpResp, \Tracking\Model\GetTrackingByIdResponse::class, \Tracking\Model\Tracking::class);
+    }
+    /**
+    * @throws AfterShipError
+    */
     public function updateTrackingById(
         string $id,
-        \Tracking\API\Tracking\UpdateTrackingByIdRequest $body,
+        \Tracking\Model\UpdateTrackingByIdRequest $body,
         array $headers = []
-    ): \Tracking\API\Tracking\UpdateTrackingByIdResponse {
+    ): \Tracking\Model\UpdateTrackingByIdResponse {
         if ($id === "") {
-            throw ErrorCode::genLocalError(ErrorCode::INVALID_REQUEST, "Param 'id' cannot be an empty string");
+            throw ErrorCode::genLocalError(ErrorCode::BAD_REQUEST, "Param 'id' cannot be an empty string");
         }
 
         $options = [
@@ -38,9 +89,9 @@ class Tracking extends APIBase
 
             'json' => $body->toRequestArray(),
         ];
-        $resp = $this->httpClient->request('PUT', sprintf("/tracking/2025-07/trackings/%s", $id), $options);
+        $httpResp = $this->httpClient->request('PUT', sprintf("/tracking/2025-07/trackings/%s", $id), $options);
 
-        return $this->parseSingleResource($resp, \Tracking\API\Tracking\UpdateTrackingByIdResponse::class);
+        return $this->processResponse($httpResp, \Tracking\Model\UpdateTrackingByIdResponse::class, \Tracking\Model\Tracking::class);
     }
     /**
     * @throws AfterShipError
@@ -48,68 +99,17 @@ class Tracking extends APIBase
     public function deleteTrackingById(
         string $id,
         array $headers = []
-    ): \Tracking\API\Tracking\DeleteTrackingByIdResponse {
+    ): \Tracking\Model\DeleteTrackingByIdResponse {
         if ($id === "") {
-            throw ErrorCode::genLocalError(ErrorCode::INVALID_REQUEST, "Param 'id' cannot be an empty string");
+            throw ErrorCode::genLocalError(ErrorCode::BAD_REQUEST, "Param 'id' cannot be an empty string");
         }
 
         $options = [
             'headers' => $headers,
         ];
-        $resp = $this->httpClient->request('DELETE', sprintf("/tracking/2025-07/trackings/%s", $id), $options);
+        $httpResp = $this->httpClient->request('DELETE', sprintf("/tracking/2025-07/trackings/%s", $id), $options);
 
-        return $this->parseSingleResource($resp, \Tracking\API\Tracking\DeleteTrackingByIdResponse::class);
-    }
-    /**
-    * @throws AfterShipError
-    */
-    public function getTrackingById(
-        string $id,
-        GetTrackingByIdQuery $query = null,
-        array $headers = []
-    ): \Tracking\API\Tracking\GetTrackingByIdResponse {
-        if ($id === "") {
-            throw ErrorCode::genLocalError(ErrorCode::INVALID_REQUEST, "Param 'id' cannot be an empty string");
-        }
-
-        $options = [
-            'headers' => $headers,
-            'query' => $query ? $query->toArray() : [],
-        ];
-        $resp = $this->httpClient->request('GET', sprintf("/tracking/2025-07/trackings/%s", $id), $options);
-
-        return $this->parseSingleResource($resp, \Tracking\API\Tracking\GetTrackingByIdResponse::class);
-    }
-    /**
-    * @throws AfterShipError
-    */
-    public function getTrackings(
-        GetTrackingsQuery $query = null,
-        array $headers = []
-    ): \Tracking\API\Tracking\GetTrackingsResponse {
-        $options = [
-            'headers' => $headers,
-            'query' => $query ? $query->toArray() : [],
-        ];
-        $resp = $this->httpClient->request('GET', sprintf("/tracking/2025-07/trackings"), $options);
-
-        return $this->parseSingleResource($resp, \Tracking\API\Tracking\GetTrackingsResponse::class);
-    }
-    /**
-    * @throws AfterShipError
-    */
-    public function createTracking(
-        \Tracking\API\Tracking\CreateTrackingRequest $body,
-        array $headers = []
-    ): \Tracking\API\Tracking\CreateTrackingResponse {
-        $options = [
-            'headers' => $headers,
-
-            'json' => $body->toRequestArray(),
-        ];
-        $resp = $this->httpClient->request('POST', sprintf("/tracking/2025-07/trackings"), $options);
-
-        return $this->parseSingleResource($resp, \Tracking\API\Tracking\CreateTrackingResponse::class);
+        return $this->processResponse($httpResp, \Tracking\Model\DeleteTrackingByIdResponse::class, \Tracking\Model\Tracking::class);
     }
     /**
     * @throws AfterShipError
@@ -117,28 +117,28 @@ class Tracking extends APIBase
     public function retrackTrackingById(
         string $id,
         array $headers = []
-    ): \Tracking\API\Tracking\RetrackTrackingByIdResponse {
+    ): \Tracking\Model\RetrackTrackingByIdResponse {
         if ($id === "") {
-            throw ErrorCode::genLocalError(ErrorCode::INVALID_REQUEST, "Param 'id' cannot be an empty string");
+            throw ErrorCode::genLocalError(ErrorCode::BAD_REQUEST, "Param 'id' cannot be an empty string");
         }
 
         $options = [
             'headers' => $headers,
         ];
-        $resp = $this->httpClient->request('POST', sprintf("/tracking/2025-07/trackings/%s/retrack", $id), $options);
+        $httpResp = $this->httpClient->request('POST', sprintf("/tracking/2025-07/trackings/%s/retrack", $id), $options);
 
-        return $this->parseSingleResource($resp, \Tracking\API\Tracking\RetrackTrackingByIdResponse::class);
+        return $this->processResponse($httpResp, \Tracking\Model\RetrackTrackingByIdResponse::class, \Tracking\Model\Tracking::class);
     }
     /**
     * @throws AfterShipError
     */
     public function markTrackingCompletedById(
         string $id,
-        \Tracking\API\Tracking\MarkTrackingCompletedByIdRequest $body,
+        \Tracking\Model\MarkTrackingCompletedByIdRequest $body,
         array $headers = []
-    ): \Tracking\API\Tracking\MarkTrackingCompletedByIdResponse {
+    ): \Tracking\Model\MarkTrackingCompletedByIdResponse {
         if ($id === "") {
-            throw ErrorCode::genLocalError(ErrorCode::INVALID_REQUEST, "Param 'id' cannot be an empty string");
+            throw ErrorCode::genLocalError(ErrorCode::BAD_REQUEST, "Param 'id' cannot be an empty string");
         }
 
         $options = [
@@ -146,8 +146,8 @@ class Tracking extends APIBase
 
             'json' => $body->toRequestArray(),
         ];
-        $resp = $this->httpClient->request('POST', sprintf("/tracking/2025-07/trackings/%s/mark-as-completed", $id), $options);
+        $httpResp = $this->httpClient->request('POST', sprintf("/tracking/2025-07/trackings/%s/mark-as-completed", $id), $options);
 
-        return $this->parseSingleResource($resp, \Tracking\API\Tracking\MarkTrackingCompletedByIdResponse::class);
+        return $this->processResponse($httpResp, \Tracking\Model\MarkTrackingCompletedByIdResponse::class, \Tracking\Model\Tracking::class);
     }
 }

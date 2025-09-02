@@ -10,16 +10,25 @@ use Psr\Http\Message\ResponseInterface;
 
 class APIBase
 {
-    protected function parseSingleResource(ResponseInterface $resp, $modelClass)
+    protected function processResponse(ResponseInterface $resp, $responseModelClass, $dataModelClass)
     {
+        $header = $resp->getHeaders();
         $body = $resp->getBody()->getContents();
         $statusCode = $resp->getStatusCode();
         $response = json_decode($body, true);
 
         if ($statusCode < 200 || $statusCode > 299) {
-            throw ErrorCode::genRemoteError($statusCode, $response['meta']['code'] ?? null, $body, $response['meta']['message'] ?? null, $resp->getHeaders() ?? null);
+            throw ErrorCode::genRemoteError($statusCode, $response['meta']['code'] ?? null, $body, $response['meta']['message'] ?? null, $header);
         }
+        $data = $this->parseData($response['data'], $dataModelClass);
+        $ret = new $responseModelClass();
+        $ret->setResponseHeader($header);
+        $ret->setData($data);
+        return $ret;
+    }
 
-        return $modelClass::fromArray($response['data'], $modelClass);
+    protected function parseData(array $data, $modelClass)
+    {
+        return $modelClass::fromArray($data, $modelClass);
     }
 }

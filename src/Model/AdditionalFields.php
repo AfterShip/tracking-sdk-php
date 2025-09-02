@@ -7,13 +7,13 @@ namespace Tracking\Model;
 
 use Tracking\Model\Base\Base;
 
-class AdditionalFields
+enum AdditionalFields: string
 {
-    const TRACKING_ACCOUNT_NUMBER = "tracking_account_number";
-    const DESTINATION_POSTAL_CODE = "destination_postal_code";
-    const DESTINATION_STATE = "destination_state";
-    const TRACKING_KEY = "tracking_key";
-    const ORIGIN_COUNTRY_REGION = "origin_country_region";
-    const DESTINATION_COUNTRY_REGION = "destination_country_region";
-    const TRACKING_SHIP_DATE = "tracking_ship_date";
+    case TRACKING_ACCOUNT_NUMBER = "tracking_account_number";
+    case DESTINATION_POSTAL_CODE = "destination_postal_code";
+    case DESTINATION_STATE = "destination_state";
+    case TRACKING_KEY = "tracking_key";
+    case ORIGIN_COUNTRY_REGION = "origin_country_region";
+    case DESTINATION_COUNTRY_REGION = "destination_country_region";
+    case TRACKING_SHIP_DATE = "tracking_ship_date";
 }

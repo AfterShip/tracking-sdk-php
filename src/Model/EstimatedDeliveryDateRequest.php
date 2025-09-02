@@ -10,35 +10,45 @@ use Tracking\Model\Base\Base;
 class EstimatedDeliveryDateRequest extends Base
 {
     /**
-     * @var string AfterShip's unique code of courier. Please refer to https://track.aftership.com/couriers/download.
+     * @var string|null AfterShip's unique code of courier. Please refer to https://track.aftership.com/couriers/download.
+     * @required
      */
     public $slug;
+
     /**
      * @var string|null AfterShip’s unique code represents carrier’s shipping and delivery options. Refer to .
      */
     public $service_type_name;
+
     /**
-     * @var OriginAddressEstimatedDeliveryDateRequest The location from where the package is picked up by the carrier to be delivered to the final destination.
+     * @var \Tracking\Model\EstimatedDeliveryDateRequestOriginAddress|null The location from where the package is picked up by the carrier to be delivered to the final destination.
+     * @required
      */
     public $origin_address;
+
     /**
-     * @var DestinationAddressEstimatedDeliveryDateRequest The final destination of the customer where the delivery will be made.
+     * @var \Tracking\Model\EstimatedDeliveryDateRequestDestinationAddress|null The final destination of the customer where the delivery will be made.
+     * @required
      */
     public $destination_address;
+
     /**
-     * @var WeightEstimatedDeliveryDateRequest AfterShip uses this object to calculate the total weight of the order.
+     * @var \Tracking\Model\EstimatedDeliveryDateRequestWeight|null AfterShip uses this object to calculate the total weight of the order.
      */
     public $weight;
+
     /**
      * @var int|null The number of packages.
      */
     public $package_count;
+
     /**
      * @var string|null The local pickup time in the origin address time zone of the package.Either `pickup_time` or `estimated_pickup` is required.
      */
     public $pickup_time;
+
     /**
-     * @var EstimatedPickupEstimatedDeliveryDateRequest The local pickup time of the package.Either `pickup_time` or `estimated_pickup` is required.
+     * @var \Tracking\Model\EstimatedDeliveryDateRequestEstimatedPickup|null The local pickup time of the package.Either `pickup_time` or `estimated_pickup` is required.
      */
     public $estimated_pickup;
 }

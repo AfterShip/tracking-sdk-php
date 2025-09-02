@@ -10,11 +10,13 @@ use Tracking\Model\Base\Base;
 class CourierConnectionResponseForGetCourierConnections extends Base
 {
     /**
-     * @var \Tracking\Model\Meta Meta data
+     * @var \Tracking\Model\Meta|null Meta data
+     * @required
      */
     public $meta;
+
     /**
-     * @var DataCourierConnectionResponseForGetCourierConnections
+     * @var \Tracking\Model\CourierConnectionResponseForGetCourierConnectionsData|null
      */
     public $data;
 }

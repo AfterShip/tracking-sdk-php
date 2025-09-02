@@ -7,34 +7,35 @@ namespace Tracking\Exception;
 
 class ErrorCode
 {
-    const SDK_REQUEST_ERROR = 'REQUEST_ERROR';
-    const SDK_TIMED_OUT = 'TIMED_OUT';
-    const INVALID_API_KEY = 'INVALID_API_KEY';
-    const INVALID_OPTION = 'INVALID_OPTION';
-    const RATE_LIMIT_EXCEEDED = 'RATE_LIMIT_EXCEEDED';
+    final const INVALID_API_KEY = 'INVALID_API_KEY';
+    final const INVALID_OPTION = 'INVALID_OPTION';
+    final const BAD_REQUEST = 'BAD_REQUEST';
+    final const RATE_LIMIT_EXCEED = 'RATE_LIMIT_EXCEED';
+    final const TIMED_OUT = 'TIMED_OUT';
+    final const UNKNOWN_ERROR = 'UNKNOWN_ERROR';
+    final const INVALID_REQUEST = 'INVALID_REQUEST';
+    final const INVALID_JSON = 'INVALID_JSON';
+    final const TRACKING_ALREADY_EXIST = 'TRACKING_ALREADY_EXIST';
+    final const TRACKING_DOES_NOT_EXIST = 'TRACKING_DOES_NOT_EXIST';
+    final const TRACKING_NUMBER_INVALID = 'TRACKING_NUMBER_INVALID';
+    final const TRACKING_REQUIRED = 'TRACKING_REQUIRED';
+    final const TRACKING_NUMBER_REQUIRED = 'TRACKING_NUMBER_REQUIRED';
+    final const VALUE_INVALID = 'VALUE_INVALID';
+    final const VALUE_REQUIRED = 'VALUE_REQUIRED';
+    final const SLUG_INVALID = 'SLUG_INVALID';
+    final const MISSING_OR_INVALID_REQUIRED_FIELD = 'MISSING_OR_INVALID_REQUIRED_FIELD';
+    final const BAD_COURIER = 'BAD_COURIER';
+    final const INACTIVE_RETRACK_NOT_ALLOWED = 'INACTIVE_RETRACK_NOT_ALLOWED';
+    final const NOTIFICATION_REQUIRED = 'NOTIFICATION_REQUIRED';
+    final const ID_INVALID = 'ID_INVALID';
+    final const RETRACK_ONCE_ALLOWED = 'RETRACK_ONCE_ALLOWED';
+    final const TRACKING_NUMBER_FORMAT_INVALID = 'TRACKING_NUMBER_FORMAT_INVALID';
+    final const API_KEY_INVALID = 'API_KEY_INVALID';
+    final const REQUEST_NOT_ALLOWED = 'REQUEST_NOT_ALLOWED';
+    final const NOT_FOUND = 'NOT_FOUND';
+    final const TOO_MANY_REQUEST = 'TOO_MANY_REQUEST';
+    final const INTERNAL_ERROR = 'INTERNAL_ERROR';
 
-    const INVALID_REQUEST = 'INVALID_REQUEST';
-    const INVALID_JSON = 'INVALID_JSON';
-    const TRACKING_ALREADY_EXIST = 'TRACKING_ALREADY_EXIST';
-    const TRACKING_DOES_NOT_EXIST = 'TRACKING_DOES_NOT_EXIST';
-    const TRACKING_NUMBER_INVALID = 'TRACKING_NUMBER_INVALID';
-    const TRACKING_REQUIRED = 'TRACKING_REQUIRED';
-    const TRACKING_NUMBER_REQUIRED = 'TRACKING_NUMBER_REQUIRED';
-    const VALUE_INVALID = 'VALUE_INVALID';
-    const VALUE_REQUIRED = 'VALUE_REQUIRED';
-    const SLUG_INVALID = 'SLUG_INVALID';
-    const MISSING_OR_INVALID_REQUIRED_FIELD = 'MISSING_OR_INVALID_REQUIRED_FIELD';
-    const BAD_COURIER = 'BAD_COURIER';
-    const INACTIVE_RETRACK_NOT_ALLOWED = 'INACTIVE_RETRACK_NOT_ALLOWED';
-    const NOTIFICATION_REUQIRED = 'NOTIFICATION_REUQIRED';
-    const ID_INVALID = 'ID_INVALID';
-    const RETRACK_ONCE_ALLOWED = 'RETRACK_ONCE_ALLOWED';
-    const TRACKING_NUMBER_FORMAT_INVALID = 'TRACKING_NUMBER_FORMAT_INVALID';
-    const API_KEY_INVALID = 'API_KEY_INVALID';
-    const REQUEST_NOT_ALLOWED = 'REQUEST_NOT_ALLOWED';
-    const NOT_FOUND = 'NOT_FOUND';
-    const TOO_MANY_REQUEST = 'TOO_MANY_REQUEST';
-    const INTERNAL_ERROR = 'INTERNAL_ERROR';
     private static $errorMap = [
         400 => self::INVALID_REQUEST,
         4001 => self::INVALID_JSON,
@@ -49,7 +50,7 @@ class ErrorCode
         4011 => self::MISSING_OR_INVALID_REQUIRED_FIELD,
         4012 => self::BAD_COURIER,
         4013 => self::INACTIVE_RETRACK_NOT_ALLOWED,
-        4014 => self::NOTIFICATION_REUQIRED,
+        4014 => self::NOTIFICATION_REQUIRED,
         4015 => self::ID_INVALID,
         4016 => self::RETRACK_ONCE_ALLOWED,
         4017 => self::TRACKING_NUMBER_FORMAT_INVALID,
@@ -63,39 +64,9 @@ class ErrorCode
         504 => self::INTERNAL_ERROR,
     ];
 
-    private static $errorMessageMap = [
-        self::INVALID_API_KEY => "Invalid API key",
-        self::INVALID_OPTION => "Invalid option",
-        self::RATE_LIMIT_EXCEEDED => "You have exceeded the API call rate limit. The default limit is 10 requests per second.",
-        self::SDK_TIMED_OUT => "Request timed out",
-        self::SDK_REQUEST_ERROR => "Request error",
-        self::INVALID_REQUEST => "The request was invalid or cannot be otherwise served.",
-        self::INVALID_JSON => "Invalid JSON data.",
-        self::TRACKING_ALREADY_EXIST => "Tracking already exists.",
-        self::TRACKING_DOES_NOT_EXIST => "Tracking does not exist.",
-        self::TRACKING_NUMBER_INVALID => "The value of tracking_number is invalid.",
-        self::TRACKING_REQUIRED => "tracking object is required.",
-        self::TRACKING_NUMBER_REQUIRED => "tracking_number is required.",
-        self::VALUE_INVALID => "The value of [field_name] is invalid.",
-        self::VALUE_REQUIRED => "[field_name] is required.",
-        self::SLUG_INVALID => "The value of slug is invalid.",
-        self::MISSING_OR_INVALID_REQUIRED_FIELD => "Missing or invalid value of the required fields for this courier. Besides tracking_number, also required: [field_name]",
-        self::BAD_COURIER => "The error message will be one of the following:1. Unable to import shipment as the carrier is not on your approved list for carrier auto-detection. Add the carrier here: https://admin.aftership.com/settings/couriers2. Unable to import shipment as we don’t recognize the carrier from this tracking number.3. Unable to import shipment as the tracking number has an invalid format.4. Unable to import shipment as this carrier is no longer supported.5. Unable to import shipment as the tracking number does not belong to a carrier in that group.",
-        self::INACTIVE_RETRACK_NOT_ALLOWED => "Retrack is not allowed. You can only retrack an inactive tracking.",
-        self::NOTIFICATION_REUQIRED => "notification object is required.",
-        self::ID_INVALID => "The value of id is invalid.",
-        self::RETRACK_ONCE_ALLOWED => "Retrack is not allowed. You can only retrack each shipment once.",
-        self::TRACKING_NUMBER_FORMAT_INVALID => "The format of tracking_number is invalid.",
-        self::API_KEY_INVALID => "The API Key is invalid.",
-        self::REQUEST_NOT_ALLOWED => "The request is understood, but it has been refused or access is not allowed.",
-        self::NOT_FOUND => "The URI requested is invalid or the resource requested does not exist.",
-        self::TOO_MANY_REQUEST => "You have exceeded the API call rate limit. The default limit is 10 requests per second.",
-        self::INTERNAL_ERROR => "Something went wrong on AfterShip's end.",
-    ];
-
     public static function genRemoteError($statusCode, $metaCode, $responseBody = null, $message = null, $responseHeader = null): AfterShipError
     {
-        $errorCode = self::locateErrorCode($metaCode);
+        $errorCode = self::locateErrorCode($metaCode, $statusCode);
         return self::genError($errorCode, $statusCode, $metaCode, $responseBody, $message, $responseHeader);
     }
 
@@ -107,17 +78,23 @@ class ErrorCode
     public static function genError($errorCode, $statusCode, $metaCode, $responseBody = null, $message = null, $responseHeader = null): AfterShipError
     {
         if (empty($message)) {
-            $message = self::$errorMessageMap[$errorCode] ?? "Unknown error";
+            $message = "Unknown error";
         }
         return new AfterShipError($message, $errorCode, $statusCode, $metaCode, $responseBody, $responseHeader);
     }
 
-    private static function locateErrorCode($metaCode): string
+    private static function locateErrorCode($metaCode, $statusCode): string
     {
         if (isset(self::$errorMap[$metaCode])) {
             return self::$errorMap[$metaCode];
         }
 
-        return self::INVALID_REQUEST;
+        if ($statusCode >= 500) {
+            return self::UNKNOWN_ERROR;
+        }
+        if ($statusCode >= 400) {
+            return self::BAD_REQUEST;
+        }
+        return self::UNKNOWN_ERROR;
     }
 }

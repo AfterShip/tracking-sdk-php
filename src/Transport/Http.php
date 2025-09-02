@@ -21,7 +21,7 @@ class Http
     private $config;
     const CONTENT_TYPE = 'application/json';
 
-    const SDK_VERSION = '12.0.0';
+    const SDK_VERSION = '13.0.0';
 
     public function __construct(Config $config)
     {
@@ -59,18 +59,14 @@ class Http
         $options['timeout'] = $this->config->getTimeout() / 1000;
 
         try {
-            // for compatibility with PHP 8.*
-            $oldErrorReporting = error_reporting();
-            error_reporting($oldErrorReporting & ~E_DEPRECATED);
             $resp = $this->client->request($method, $url, $options);
-            error_reporting($oldErrorReporting);
             return $resp;
         } catch (\GuzzleHttp\Exception\ConnectException $e) {
-            throw ErrorCode::genLocalError(ErrorCode::SDK_TIMED_OUT, 'Connection error: ' . $e->getMessage());
+            throw ErrorCode::genLocalError(ErrorCode::TIMED_OUT, 'Connection error: ' . $e->getMessage());
         } catch (\Exception $e) {
-            throw ErrorCode::genLocalError(ErrorCode::SDK_REQUEST_ERROR, 'Request error: ' . $e->getMessage());
+            throw ErrorCode::genLocalError(ErrorCode::UNKNOWN_ERROR, 'Request error: ' . $e->getMessage());
         } catch (\GuzzleHttp\Exception\GuzzleException $e) {
-            throw ErrorCode::genLocalError(ErrorCode::SDK_REQUEST_ERROR, 'Request error: ' . $e->getMessage());
+            throw ErrorCode::genLocalError(ErrorCode::UNKNOWN_ERROR, 'Request error: ' . $e->getMessage());
         }
     }
 
@@ -116,10 +112,9 @@ class Http
 
     private function genHeaders(string $method, string $urlWithQuery, array $payload, array $customerHeader): array
     {
-        $asClient = 'aftership-sdk-php/' . self::SDK_VERSION . ' (https://www.aftership.com) guzzle/6.5.8';
+        $asClient = 'tracking-sdk-php/13.0.0 (https://www.aftership.com) guzzle/6.5.8';
         $headers = $customerHeader + [
             'as-api-key' => $this->config->getApiKey(),
-            'date' => gmdate('D, d M Y H:i:s \G\M\T', time()),
             'content-type' => '',
             'user-agent' => $asClient,
             'aftership-client' => $asClient,
@@ -136,6 +131,8 @@ class Http
         // if not RSA or AES encryption. No need to sign the request
         if ($authType == Config::AUTHENTICATION_TYPE_API_KEY) {
             return $headers;
+        } else {
+            $headers['date'] = gmdate('D, d M Y H:i:s \G\M\T', time());
         }
 
         $signString = $this->getSignString($method, $urlWithQuery, $payload, $headers);

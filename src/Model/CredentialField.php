@@ -10,15 +10,17 @@ use Tracking\Model\Base\Base;
 class CredentialField extends Base
 {
     /**
-     * @var string The display name of the credential field that users must provide when creating a carrier connection.
+     * @var string|null The display name of the credential field that users must provide when creating a carrier connection.
      */
     public $name;
+
     /**
-     * @var string The data type of the credential field, indicating what kind of input is expected.
+     * @var string|null The data type of the credential field, indicating what kind of input is expected.
      */
     public $type;
+
     /**
-     * @var bool It indicates whether the credentials field must be provided or not when creating a carrier connection.
+     * @var bool|null It indicates whether the credentials field must be provided or not when creating a carrier connection.
      */
     public $required;
 }

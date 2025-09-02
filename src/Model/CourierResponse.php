@@ -10,11 +10,14 @@ use Tracking\Model\Base\Base;
 class CourierResponse extends Base
 {
     /**
-     * @var \Tracking\Model\Meta Meta data
+     * @var \Tracking\Model\Meta|null Meta data
+     * @required
      */
     public $meta;
+
     /**
-     * @var DataCourierResponse
+     * @var \Tracking\Model\CourierResponseData|null
+     * @required
      */
     public $data;
 }
