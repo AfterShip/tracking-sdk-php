@@ -21,7 +21,7 @@ class Http
     private $config;
     const CONTENT_TYPE = 'application/json';
 
-    const SDK_VERSION = '13.0.0';
+    const SDK_VERSION = '14.0.0';
 
     public function __construct(Config $config)
     {
@@ -47,7 +47,7 @@ class Http
 
         $urlWithQuery = $this->config->getDomain() . $url;
         if (!empty($options['query'])) {
-            $urlWithQuery .= '?' . http_build_query($options['query']);
+            $urlWithQuery .= '?' . http_build_query($options['query'], '', '&', PHP_QUERY_RFC3986);
         }
 
         $options['headers'] =  $this->genHeaders($method, $urlWithQuery, $options['json'] ?? [], $options['headers'] ?? []);
@@ -112,7 +112,7 @@ class Http
 
     private function genHeaders(string $method, string $urlWithQuery, array $payload, array $customerHeader): array
     {
-        $asClient = 'tracking-sdk-php/13.0.0 (https://www.aftership.com) guzzle/6.5.8';
+        $asClient = 'tracking-sdk-php/14.0.0 (https://www.aftership.com) guzzle/6.5.8';
         $headers = $customerHeader + [
             'as-api-key' => $this->config->getApiKey(),
             'content-type' => '',

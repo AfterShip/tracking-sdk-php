@@ -38,7 +38,7 @@ Before you begin to integrate:
 
 ### API and SDK Version
 
-- SDK Version: 13.0.0
+- SDK Version: 14.0.0
 - API Version: 2025-07
 ## Quick Start
 
