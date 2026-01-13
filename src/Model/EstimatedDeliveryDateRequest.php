@@ -43,12 +43,12 @@ class EstimatedDeliveryDateRequest extends Base
     public $package_count;
 
     /**
-     * @var string|null The local pickup time in the origin address time zone of the package.Either `pickup_time` or `estimated_pickup` is required.
+     * @var string|null The local pickup time in the origin address time zone of the package.</br><span style=color:#ff6b2b;padding:2px>**Either `pickup_time` or `estimated_pickup` is required.**</span>
      */
     public $pickup_time;
 
     /**
-     * @var \Tracking\Model\EstimatedDeliveryDateRequestEstimatedPickup|null The local pickup time of the package.Either `pickup_time` or `estimated_pickup` is required.
+     * @var \Tracking\Model\EstimatedDeliveryDateRequestEstimatedPickup|null The local pickup time of the package.</br><span style=color:#ff6b2b;padding:2px>**Either `pickup_time` or `estimated_pickup` is required.**</span>
      */
     public $estimated_pickup;
 }

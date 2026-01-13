@@ -31,7 +31,7 @@ class Courier extends APIBase
             'headers' => $headers,
             'query' => $query ? $query->toArray() : [],
         ];
-        $httpResp = $this->httpClient->request('GET', sprintf("/tracking/2025-07/couriers"), $options);
+        $httpResp = $this->httpClient->request('GET', sprintf("/tracking/2026-01/couriers"), $options);
 
         return $this->processResponse($httpResp, \Tracking\Model\GetCouriersResponse::class, \Tracking\Model\GetCouriersResponseData::class);
     }
@@ -47,7 +47,7 @@ class Courier extends APIBase
 
             'json' => $body->toRequestArray(),
         ];
-        $httpResp = $this->httpClient->request('POST', sprintf("/tracking/2025-07/couriers/detect"), $options);
+        $httpResp = $this->httpClient->request('POST', sprintf("/tracking/2026-01/couriers/detect"), $options);
 
         return $this->processResponse($httpResp, \Tracking\Model\DetectCourierResponse::class, \Tracking\Model\DetectCourierResponseData::class);
     }
