@@ -51,19 +51,19 @@ class CreateTrackingRequest extends Base
     public $language;
 
     /**
-     * @var string|null The promised delivery date of the order. It uses the formats:- YYYY-MM-DD- YYYY-MM-DDTHH:mm:ss- YYYY-MM-DDTHH:mm:ssZ
+     * @var \Tracking\Model\CreateTrackingRequestOrderPromisedDeliveryDate|null The promised delivery date of the order in shipment recipient’s timezone.
      */
     public $order_promised_delivery_date;
-
-    /**
-     * @var \Tracking\Model\CreateTrackingRequestDeliveryType|null Shipment delivery type- pickup_at_store- pickup_at_courier- door_to_door
-     */
-    public $delivery_type;
 
     /**
      * @var string|null Shipment pickup location for receiver
      */
     public $pickup_location;
+
+    /**
+     * @var \Tracking\Model\CreateTrackingRequestDeliveryType|null Shipment delivery type- pickup_at_store- pickup_at_courier- door_to_door
+     */
+    public $delivery_type;
 
     /**
      * @var string|null Shipment pickup note for receiver

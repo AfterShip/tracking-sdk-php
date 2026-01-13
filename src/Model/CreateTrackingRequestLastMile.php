@@ -17,6 +17,7 @@ class CreateTrackingRequestLastMile extends Base
 
     /**
      * @var string|null The unique code of the carrier responsible for the last-mile of the shipment.  Find all the courier slugs .
+     * @required
      */
     public $slug;
 }

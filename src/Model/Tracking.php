@@ -195,11 +195,6 @@ class Tracking extends Base
     public $tracked_count;
 
     /**
-     * @var bool|null Indicates if the shipment is trackable till the final destination.Three possible values:- true- false- null
-     */
-    public $last_mile_tracking_supported;
-
-    /**
      * @var string|null The recipient’s language. If you set up AfterShip notifications in different languages, we use this to send the recipient tracking updates in their preferred language.
      */
     public $language;
@@ -230,7 +225,7 @@ class Tracking extends Base
     public $return_to_sender;
 
     /**
-     * @var string|null The promised delivery date of the order. It uses the formats:- YYYY-MM-DD- YYYY-MM-DDTHH:mm:ss- YYYY-MM-DDTHH:mm:ssZ
+     * @var \Tracking\Model\TrackingOrderPromisedDeliveryDate|null The promised delivery date of the order in shipment recipient’s timezone.
      */
     public $order_promised_delivery_date;
 

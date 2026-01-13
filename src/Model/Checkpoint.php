@@ -42,7 +42,7 @@ class Checkpoint extends Base
     /**
      * @var string|null Postal code info provided by carrier
      */
-    public $zip;
+    public $postal_code;
 
     /**
      * @var \Tracking\Model\CheckpointCoordinate|null The latitude and longitude coordinates indicate the precise location of the shipments that are currently in transit.

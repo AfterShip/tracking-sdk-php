@@ -20,10 +20,10 @@ If you need support using AfterShip products, please contact support@aftership.c
   - [Error Handling](#error-handling)
     - [Error List](#error-list)
   - [Endpoints](#endpoints)
+    - [/trackings](#trackings)
     - [/couriers](#couriers)
     - [/courier-connections](#courier-connections)
     - [/estimated-delivery-date](#estimated-delivery-date)
-    - [/trackings](#trackings)
   - [Help](#help)
   - [License](#license)
 
@@ -38,8 +38,8 @@ Before you begin to integrate:
 
 ### API and SDK Version
 
-- SDK Version: 14.0.0
-- API Version: 2025-07
+- SDK Version: 15.0.0
+- API Version: 2026-01
 ## Quick Start
 
 ### Installation
@@ -143,6 +143,14 @@ The SDK will return an error object when there is any error during the request, 
 
 The AfterShip instance has the following properties which are exactly the same as the API endpoints:
 
+- tracking
+  - Get trackings
+  - Create a tracking
+  - Get a tracking by ID
+  - Update a tracking by ID
+  - Delete a tracking by ID
+  - Retrack an expired tracking by ID
+  - Mark tracking as completed by ID
 - courier
   - Get couriers
   - Detect courier
@@ -155,14 +163,97 @@ The AfterShip instance has the following properties which are exactly the same a
 - estimated_delivery_date
   - Prediction for the Estimated Delivery Date
   - Batch prediction for the Estimated Delivery Date
-- tracking
-  - Get trackings
-  - Create a tracking
-  - Get a tracking by ID
-  - Update a tracking by ID
-  - Delete a tracking by ID
-  - Retrack an expired tracking by ID
-  - Mark tracking as completed by ID
+
+### /trackings
+**GET** /trackings
+
+```php
+
+$query = new \Tracking\Model\GetTrackingsQuery();
+$response = $client->tracking->getTrackings(
+    
+    
+    $query
+);
+var_dump($response);
+```
+
+**POST** /trackings
+
+```php
+$payload = new \Tracking\Model\CreateTrackingRequest();
+$payload->tracking_number = 'valid_value';
+
+$response = $client->tracking->createTracking(
+    
+    $payload
+    
+);
+var_dump($response);
+```
+
+**GET** /trackings/{id}
+
+```php
+
+$query = new \Tracking\Model\GetTrackingByIdQuery();
+$response = $client->tracking->getTrackingById(
+    'valid_value', 
+    
+    $query
+);
+var_dump($response);
+```
+
+**PUT** /trackings/{id}
+
+```php
+$payload = new \Tracking\Model\UpdateTrackingByIdRequest();
+
+$response = $client->tracking->updateTrackingById(
+    'valid_value', 
+    $payload
+    
+);
+var_dump($response);
+```
+
+**DELETE** /trackings/{id}
+
+```php
+
+$response = $client->tracking->deleteTrackingById(
+    'valid_value'
+    
+    
+);
+var_dump($response);
+```
+
+**POST** /trackings/{id}/retrack
+
+```php
+
+$response = $client->tracking->retrackTrackingById(
+    'valid_value'
+    
+    
+);
+var_dump($response);
+```
+
+**POST** /trackings/{id}/mark-as-completed
+
+```php
+$payload = new \Tracking\Model\MarkTrackingCompletedByIdRequest();
+
+$response = $client->tracking->markTrackingCompletedById(
+    'valid_value', 
+    $payload
+    
+);
+var_dump($response);
+```
 
 ### /couriers
 **GET** /couriers
@@ -285,97 +376,6 @@ $payload = new \Tracking\Model\PredictBatchRequest();
 
 $response = $client->estimated_delivery_date->predictBatch(
     
-    $payload
-    
-);
-var_dump($response);
-```
-
-### /trackings
-**GET** /trackings
-
-```php
-
-$query = new \Tracking\Model\GetTrackingsQuery();
-$response = $client->tracking->getTrackings(
-    
-    
-    $query
-);
-var_dump($response);
-```
-
-**POST** /trackings
-
-```php
-$payload = new \Tracking\Model\CreateTrackingRequest();
-$payload->tracking_number = 'valid_value';
-
-$response = $client->tracking->createTracking(
-    
-    $payload
-    
-);
-var_dump($response);
-```
-
-**GET** /trackings/{id}
-
-```php
-
-$query = new \Tracking\Model\GetTrackingByIdQuery();
-$response = $client->tracking->getTrackingById(
-    'valid_value', 
-    
-    $query
-);
-var_dump($response);
-```
-
-**PUT** /trackings/{id}
-
-```php
-$payload = new \Tracking\Model\UpdateTrackingByIdRequest();
-
-$response = $client->tracking->updateTrackingById(
-    'valid_value', 
-    $payload
-    
-);
-var_dump($response);
-```
-
-**DELETE** /trackings/{id}
-
-```php
-
-$response = $client->tracking->deleteTrackingById(
-    'valid_value'
-    
-    
-);
-var_dump($response);
-```
-
-**POST** /trackings/{id}/retrack
-
-```php
-
-$response = $client->tracking->retrackTrackingById(
-    'valid_value'
-    
-    
-);
-var_dump($response);
-```
-
-**POST** /trackings/{id}/mark-as-completed
-
-```php
-$payload = new \Tracking\Model\MarkTrackingCompletedByIdRequest();
-
-$response = $client->tracking->markTrackingCompletedById(
-    'valid_value', 
     $payload
     
 );

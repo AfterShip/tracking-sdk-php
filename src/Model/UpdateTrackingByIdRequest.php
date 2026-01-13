@@ -40,7 +40,7 @@ class UpdateTrackingByIdRequest extends Base
     public $language;
 
     /**
-     * @var string|null The promised delivery date of the order. It uses the formats:- YYYY-MM-DD- YYYY-MM-DDTHH:mm:ss- YYYY-MM-DDTHH:mm:ssZ
+     * @var \Tracking\Model\UpdateTrackingByIdRequestOrderPromisedDeliveryDate|null The promised delivery date of the order in shipment recipient’s timezone.
      */
     public $order_promised_delivery_date;
 
