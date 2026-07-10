@@ -16,7 +16,7 @@ class EstimatedDeliveryDateRequestOriginAddress extends Base
     public $country_region;
 
     /**
-     * @var string|null State, province, or the equivalent location of the origin address. Use 3 letters of ISO 3166-1 country/region code for countries/regions without state. Either `origin_address.state` or `origin_address.postal_code` is required.
+     * @var string|null State, province, or the equivalent location of the origin address. Use 3 letters of ISO 3166-1 country/region code for countries/regions without state. </br><span style=color:#ff6b2b;padding:2px>**Either `origin_address.state` or `origin_address.postal_code` is required.**</span>
      */
     public $state;
 
@@ -26,7 +26,7 @@ class EstimatedDeliveryDateRequestOriginAddress extends Base
     public $city;
 
     /**
-     * @var string|null Postal code of the origin address. Use 3 letters of ISO 3166-1 country/region code for countries/regions without postal code. Either `origin_address.state` or `origin_address.postal_code` is required.
+     * @var string|null Postal code of the origin address. Use 3 letters of ISO 3166-1 country/region code for countries/regions without postal code. </br><span style=color:#ff6b2b;padding:2px>**Either `origin_address.state` or `origin_address.postal_code` is required.**</span>
      */
     public $postal_code;
 

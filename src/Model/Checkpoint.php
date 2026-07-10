@@ -93,4 +93,9 @@ class Checkpoint extends Base
      * @var \Tracking\Model\CheckpointSource|null The source of the checkpoint, which can either be from the carrier or when the user marks the tracking as completed.
      */
     public $source;
+
+    /**
+     * @var string|null Unique hash identifier for each checkpoint event, could be used for deduplication.
+     */
+    public $hash;
 }

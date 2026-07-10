@@ -31,7 +31,7 @@ class CourierConnection extends APIBase
             'headers' => $headers,
             'query' => $query ? $query->toArray() : [],
         ];
-        $httpResp = $this->httpClient->request('GET', sprintf("/tracking/2026-01/courier-connections"), $options);
+        $httpResp = $this->httpClient->request('GET', sprintf("/tracking/2026-07/courier-connections"), $options);
 
         return $this->processResponse($httpResp, \Tracking\Model\GetCourierConnectionsResponse::class, \Tracking\Model\GetCourierConnectionsResponseData::class);
     }
@@ -47,7 +47,7 @@ class CourierConnection extends APIBase
 
             'json' => $body->toRequestArray(),
         ];
-        $httpResp = $this->httpClient->request('POST', sprintf("/tracking/2026-01/courier-connections"), $options);
+        $httpResp = $this->httpClient->request('POST', sprintf("/tracking/2026-07/courier-connections"), $options);
 
         return $this->processResponse($httpResp, \Tracking\Model\PostCourierConnectionsResponse::class, \Tracking\Model\CourierConnection::class);
     }
@@ -65,7 +65,7 @@ class CourierConnection extends APIBase
         $options = [
             'headers' => $headers,
         ];
-        $httpResp = $this->httpClient->request('GET', sprintf("/tracking/2026-01/courier-connections/%s", $id), $options);
+        $httpResp = $this->httpClient->request('GET', sprintf("/tracking/2026-07/courier-connections/%s", $id), $options);
 
         return $this->processResponse($httpResp, \Tracking\Model\GetCourierConnectionsByIdResponse::class, \Tracking\Model\CourierConnection::class);
     }
@@ -86,7 +86,7 @@ class CourierConnection extends APIBase
 
             'json' => $body->toRequestArray(),
         ];
-        $httpResp = $this->httpClient->request('PATCH', sprintf("/tracking/2026-01/courier-connections/%s", $id), $options);
+        $httpResp = $this->httpClient->request('PATCH', sprintf("/tracking/2026-07/courier-connections/%s", $id), $options);
 
         return $this->processResponse($httpResp, \Tracking\Model\PutCourierConnectionsByIdResponse::class, \Tracking\Model\CourierConnection::class);
     }
@@ -104,7 +104,7 @@ class CourierConnection extends APIBase
         $options = [
             'headers' => $headers,
         ];
-        $httpResp = $this->httpClient->request('DELETE', sprintf("/tracking/2026-01/courier-connections/%s", $id), $options);
+        $httpResp = $this->httpClient->request('DELETE', sprintf("/tracking/2026-07/courier-connections/%s", $id), $options);
 
         return $this->processResponse($httpResp, \Tracking\Model\DeleteCourierConnectionsByIdResponse::class, \Tracking\Model\CourierConnection::class);
     }
