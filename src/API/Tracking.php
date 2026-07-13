@@ -32,7 +32,7 @@ class Tracking extends APIBase
             'headers' => $headers,
             'query' => $query ? $query->toArray() : [],
         ];
-        $httpResp = $this->httpClient->request('GET', sprintf("/tracking/2026-01/trackings"), $options);
+        $httpResp = $this->httpClient->request('GET', sprintf("/tracking/2026-07/trackings"), $options);
 
         return $this->processResponse($httpResp, \Tracking\Model\GetTrackingsResponse::class, \Tracking\Model\GetTrackingsResponseData::class);
     }
@@ -48,7 +48,7 @@ class Tracking extends APIBase
 
             'json' => $body->toRequestArray(),
         ];
-        $httpResp = $this->httpClient->request('POST', sprintf("/tracking/2026-01/trackings"), $options);
+        $httpResp = $this->httpClient->request('POST', sprintf("/tracking/2026-07/trackings"), $options);
 
         return $this->processResponse($httpResp, \Tracking\Model\CreateTrackingResponse::class, \Tracking\Model\Tracking::class);
     }
@@ -68,7 +68,7 @@ class Tracking extends APIBase
             'headers' => $headers,
             'query' => $query ? $query->toArray() : [],
         ];
-        $httpResp = $this->httpClient->request('GET', sprintf("/tracking/2026-01/trackings/%s", $id), $options);
+        $httpResp = $this->httpClient->request('GET', sprintf("/tracking/2026-07/trackings/%s", $id), $options);
 
         return $this->processResponse($httpResp, \Tracking\Model\GetTrackingByIdResponse::class, \Tracking\Model\Tracking::class);
     }
@@ -89,7 +89,7 @@ class Tracking extends APIBase
 
             'json' => $body->toRequestArray(),
         ];
-        $httpResp = $this->httpClient->request('PUT', sprintf("/tracking/2026-01/trackings/%s", $id), $options);
+        $httpResp = $this->httpClient->request('PUT', sprintf("/tracking/2026-07/trackings/%s", $id), $options);
 
         return $this->processResponse($httpResp, \Tracking\Model\UpdateTrackingByIdResponse::class, \Tracking\Model\Tracking::class);
     }
@@ -107,7 +107,7 @@ class Tracking extends APIBase
         $options = [
             'headers' => $headers,
         ];
-        $httpResp = $this->httpClient->request('DELETE', sprintf("/tracking/2026-01/trackings/%s", $id), $options);
+        $httpResp = $this->httpClient->request('DELETE', sprintf("/tracking/2026-07/trackings/%s", $id), $options);
 
         return $this->processResponse($httpResp, \Tracking\Model\DeleteTrackingByIdResponse::class, \Tracking\Model\Tracking::class);
     }
@@ -125,7 +125,7 @@ class Tracking extends APIBase
         $options = [
             'headers' => $headers,
         ];
-        $httpResp = $this->httpClient->request('POST', sprintf("/tracking/2026-01/trackings/%s/retrack", $id), $options);
+        $httpResp = $this->httpClient->request('POST', sprintf("/tracking/2026-07/trackings/%s/retrack", $id), $options);
 
         return $this->processResponse($httpResp, \Tracking\Model\RetrackTrackingByIdResponse::class, \Tracking\Model\Tracking::class);
     }
@@ -146,7 +146,7 @@ class Tracking extends APIBase
 
             'json' => $body->toRequestArray(),
         ];
-        $httpResp = $this->httpClient->request('POST', sprintf("/tracking/2026-01/trackings/%s/mark-as-completed", $id), $options);
+        $httpResp = $this->httpClient->request('POST', sprintf("/tracking/2026-07/trackings/%s/mark-as-completed", $id), $options);
 
         return $this->processResponse($httpResp, \Tracking\Model\MarkTrackingCompletedByIdResponse::class, \Tracking\Model\Tracking::class);
     }

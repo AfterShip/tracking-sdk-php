@@ -16,7 +16,7 @@ class TrackingResponse extends Base
     public $meta;
 
     /**
-     * @var \Tracking\Model\Tracking|null Object describes the tracking information.<div style="display:none; height: 0"></div>
+     * @var \Tracking\Model\Tracking|null Object describes the tracking information.<div style="visibility:hidden; height: 0"></div>
      * @required
      */
     public $data;

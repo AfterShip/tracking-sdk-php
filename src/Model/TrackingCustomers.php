@@ -33,4 +33,9 @@ class TrackingCustomers extends Base
      * @var string|null The preferred language of the customer. If you have set up AfterShip notifications in different languages, we use this to send the tracking updates to the customer in their preferred language.
      */
     public $language;
+
+    /**
+     * @var string|null The customer's identifier on the merchant or platform (for example, Shopify) side.
+     */
+    public $id;
 }

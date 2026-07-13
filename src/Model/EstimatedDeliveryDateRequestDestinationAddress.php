@@ -16,7 +16,7 @@ class EstimatedDeliveryDateRequestDestinationAddress extends Base
     public $country_region;
 
     /**
-     * @var string|null State, province, or the equivalent location of the destination address where the package will be delivered.Either `destination_address.state` or `destination_address.postal_code` is required.
+     * @var string|null State, province, or the equivalent location of the destination address where the package will be delivered.</br><span style=color:#ff6b2b;padding:2px>**Either `destination_address.state` or `destination_address.postal_code` is required.**</span>
      */
     public $state;
 
@@ -26,7 +26,7 @@ class EstimatedDeliveryDateRequestDestinationAddress extends Base
     public $city;
 
     /**
-     * @var string|null Postal code of the destination address.Either `destination_address.state` or `destination_address.postal_code` is required.
+     * @var string|null Postal code of the destination address.</br><span style=color:#ff6b2b;padding:2px>**Either `destination_address.state` or `destination_address.postal_code` is required.**</span>
      */
     public $postal_code;
 

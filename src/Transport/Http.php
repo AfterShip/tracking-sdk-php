@@ -21,7 +21,7 @@ class Http
     private $config;
     const CONTENT_TYPE = 'application/json';
 
-    const SDK_VERSION = '15.0.0';
+    const SDK_VERSION = '16.0.0';
 
     public function __construct(Config $config)
     {
@@ -112,7 +112,7 @@ class Http
 
     private function genHeaders(string $method, string $urlWithQuery, array $payload, array $customerHeader): array
     {
-        $asClient = 'tracking-sdk-php/15.0.0 (https://www.aftership.com) guzzle/6.5.8';
+        $asClient = 'tracking-sdk-php/16.0.0 (https://www.aftership.com) guzzle/6.5.8';
         $headers = $customerHeader + [
             'as-api-key' => $this->config->getApiKey(),
             'content-type' => '',

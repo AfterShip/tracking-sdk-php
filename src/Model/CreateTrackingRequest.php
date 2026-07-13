@@ -189,4 +189,9 @@ class CreateTrackingRequest extends Base
      * @var \Tracking\Model\CreateTrackingRequestCustomers[]|null The field contains the customer information associated with the tracking. A maximum of three customer objects are allowed.
      */
     public $customers;
+
+    /**
+     * @var \Tracking\Model\CreateTrackingRequestShipmentDirection|null Indicates the business direction of the shipment in the e-commerce fulfillment lifecycle.Possible values:- `forward`: A forward (outbound-to-customer) shipment created for order fulfillment.- `return`: A return (customer-to-merchant) shipment created for after-sales return or exchange.When provided, this field gives AfterShip additional context about the shipment's intent, enabling more accurate status identification.
+     */
+    public $shipment_direction;
 }
